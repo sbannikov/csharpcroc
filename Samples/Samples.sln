@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2003
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Calculator.csproj", "{FA8746B4-352E-4863-BAD4-B523F9FFA52F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Piano", "Piano\Piano.csproj", "{3316921F-8DE9-4B75-BEA4-E13AA8EBAD29}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{90C2451A-C077-41FC-A62E-41A65B04BE48}"
+	ProjectSection(SolutionItems) = preProject
+		ReadMe.txt = ReadMe.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA8746B4-352E-4863-BAD4-B523F9FFA52F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA8746B4-352E-4863-BAD4-B523F9FFA52F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA8746B4-352E-4863-BAD4-B523F9FFA52F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA8746B4-352E-4863-BAD4-B523F9FFA52F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3316921F-8DE9-4B75-BEA4-E13AA8EBAD29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3316921F-8DE9-4B75-BEA4-E13AA8EBAD29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3316921F-8DE9-4B75-BEA4-E13AA8EBAD29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3316921F-8DE9-4B75-BEA4-E13AA8EBAD29}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0CCECAE5-1925-4540-A97A-8D11284BC19F}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://csharp/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Calculator\\Calculator.csproj
+		SccProjectName1 = Calculator
+		SccLocalPath1 = Calculator
+		SccProjectUniqueName2 = Piano\\Piano.csproj
+		SccProjectName2 = Piano
+		SccLocalPath2 = Piano
+	EndGlobalSection
+EndGlobal
