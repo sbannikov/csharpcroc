@@ -3,4 +3,6 @@
 
 Samples - примеры приложений
 *	Calculator - простой калькулятор на базе Windows Forms
+*	ConsoleThreads - многопоточное консольное приложение
 *	Piano - многоголосное пианино на 4 октавы
+*	SnmpReaderService - чтение данных по протоколу SNMP (сервис операционной системы Windows)
