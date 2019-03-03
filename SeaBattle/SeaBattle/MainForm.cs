@@ -16,6 +16,16 @@ namespace SeaBattle
     public partial class MainForm : Form
     {
         /// <summary>
+        /// Cостояние игры
+        /// </summary>
+        private Data.Game game = new Data.Game();
+
+        /// <summary>
+        /// Длина корабля
+        /// </summary>
+        private int cells = 0;
+
+        /// <summary>
         /// Конструктор формы по умолчанию
         /// </summary>
         public MainForm()
@@ -36,10 +46,11 @@ namespace SeaBattle
                 for (int y = 0; y < 10; y++)
                 {
                     // Создание кнопки
-                    var b = new Button()
+                    var b = new CellButton(x, y)
                     {
                         Size = new Size(32, 32),
-                        Location = new Point(40 * x, 40 * y)
+                        // Учет высоты меню и высоты панели инструментов при добавлении кнопки
+                        Location = new Point(40 * x, 40 * y + menu.Height + tool.Height)
                     };
                     // Обработчик события
                     b.Click += buttonClick;
@@ -57,8 +68,55 @@ namespace SeaBattle
         private void buttonClick(object sender, EventArgs e)
         {
             // Приведение типа данных
-            Button b = (Button)sender;
-            b.BackColor = Color.OrangeRed;
+            CellButton b = (CellButton)sender;
+            // Расстановка кораблей
+            switch (cells)
+            {
+                case 1: // Однопалубный корабль
+                    // Покрасить кнопку-корабль
+                    b.BackColor = Color.OrangeRed;
+                    // Отлипнуть кнопку
+                    ship1.Checked = false;
+                    // Создать корабль
+                    game.My.AddShip1(b.X, b.Y);
+                    break;
+            }
+            // Возврат в основной режим
+            cells = 0;
+        }
+
+        /// <summary>
+        /// Выход из программы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Закрыть главную форму
+            this.Close();
+        }
+
+        /// <summary>
+        /// Расстановка однопалубного корабля
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ship1_Click(object sender, EventArgs e)
+        {
+            // "залипание" кнопки
+            ship1.Checked = true;
+            // Разрешение добавления однопалубного корабля
+            cells = 1;
+        }
+
+        /// <summary>
+        /// Сохранение игры
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            game.Save(@"c:\game.xml");
         }
     }
 }
