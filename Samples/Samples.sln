@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleThreads", "ConsoleTh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcronymForm", "AcronymForm\AcronymForm.csproj", "{473C58C9-7A58-4237-9D9A-0C237C5350CE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicForm", "LogicForm\LogicForm.csproj", "{7D583C35-3FFD-4213-9B4B-6FCFE0E19AD8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{473C58C9-7A58-4237-9D9A-0C237C5350CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{473C58C9-7A58-4237-9D9A-0C237C5350CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{473C58C9-7A58-4237-9D9A-0C237C5350CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D583C35-3FFD-4213-9B4B-6FCFE0E19AD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D583C35-3FFD-4213-9B4B-6FCFE0E19AD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D583C35-3FFD-4213-9B4B-6FCFE0E19AD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D583C35-3FFD-4213-9B4B-6FCFE0E19AD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
