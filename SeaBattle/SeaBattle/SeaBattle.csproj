@@ -72,11 +72,6 @@
     <Compile Include="CellButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Data\Cell.cs" />
-    <Compile Include="Data\Field.cs" />
-    <Compile Include="Data\Game.cs" />
-    <Compile Include="Data\Ship.cs" />
-    <Compile Include="Data\State.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,6 +119,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SeaBattleCore\SeaBattleCore.csproj">
+      <Project>{f5ae9bd8-fd01-497b-af36-b24e96ed78c6}</Project>
+      <Name>SeaBattleCore</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

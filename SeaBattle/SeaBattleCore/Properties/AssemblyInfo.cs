@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Морской бой")]
-[assembly: AssemblyDescription("Толстый клиент игры 'Морской бой' на базе Windows Forms")]
+[assembly: AssemblyDescription("Библиотека классов игры 'Морской бой'")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("ЗАО 'КРОК инкорпорейтед'")]
 [assembly: AssemblyProduct("Учебный курс - разработка приложений на языке C#")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("a5170bcf-2427-4bb4-9c4f-c73bf30fb08a")]
+[assembly: Guid("f5ae9bd8-fd01-497b-af36-b24e96ed78c6")]
 
 // Version information for an assembly consists of the following four values:
 //

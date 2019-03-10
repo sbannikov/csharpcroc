@@ -116,7 +116,12 @@ namespace SeaBattle
         /// <param name="e"></param>
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            game.Save(@"c:\game.xml");
+            // Запрос имени файла
+            if (save.ShowDialog() == DialogResult.OK)
+            {                
+                // Сохранение в заданный файл
+                game.Save(save.FileName);
+            }
         }
     }
 }

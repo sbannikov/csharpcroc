@@ -36,6 +36,23 @@ namespace SeaBattle.Data
         }
 
         /// <summary>
+        /// Загрузка объекта из XML-файла
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static Game Load(string name)
+        {
+            // Де(сериализатор)
+            var ser = new XmlSerializer(typeof(Game));
+            // Объект для чтения XML-файла
+            using (XmlReader rdr = XmlReader.Create(name))
+            {
+                // Десериализация из файла
+                return (Game)ser.Deserialize(rdr);
+            }
+        }
+
+        /// <summary>
         /// Сохранить объект в XML-файл
         /// </summary>
         /// <param name="name"></param>

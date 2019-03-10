@@ -14,6 +14,7 @@ namespace SeaBattle
         /// <summary>
         /// Точка входа в приложение
         /// </summary>
+        [STAThread()]
         static void Main()
         {
             Application.Run(new MainForm());
