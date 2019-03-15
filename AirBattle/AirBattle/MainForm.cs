@@ -23,6 +23,14 @@ namespace AirBattle
         /// Размер кнопки
         /// </summary>
         private const int buttonSize = 48;
+        /// <summary>
+        /// Размер создаваемого корабля
+        /// </summary>
+        private int ship;
+        /// <summary>
+        /// Состояние игры
+        /// </summary>
+        private Data.Game game;
 
         /// <summary>
         /// Конструктор по умолчанию
@@ -31,6 +39,8 @@ namespace AirBattle
         {
             // Инициализация компонентов дизайнера
             InitializeComponent();
+            // Инициализация игры
+            game = new Data.Game();
         }
 
         /// <summary>
@@ -53,7 +63,7 @@ namespace AirBattle
                 // Выравнивание текста
                 TextAlign = ContentAlignment.MiddleCenter,
                 // Положение метки
-                Location = new Point(buttonSize * x, buttonSize * y + menu.Height)
+                Location = new Point(buttonSize * x, buttonSize * y + menu.Height + tool.Height)
             };
             // Добавление метки на форму
             Controls.Add(label);
@@ -73,12 +83,12 @@ namespace AirBattle
                 {
                     // Создание новой кнопки
                     // Использование инициализатора
-                    Button b = new Button()
+                    CellButton b = new CellButton(x, y)
                     {
                         // Размер кнопки
                         Size = new Size(buttonSize, buttonSize),
                         // Положение кнопки
-                        Location = new Point(buttonSize * x, buttonSize * y + menu.Height)
+                        Location = new Point(buttonSize * x, buttonSize * y + menu.Height + tool.Height)
                     };
                     // Добавление обработчика кнопки
                     b.Click += Button_Click;
@@ -104,9 +114,19 @@ namespace AirBattle
         private void Button_Click(object sender, EventArgs e)
         {
             // Приведение типа
-            Button b = (Button)sender;
-            // Перекрасить кнопку
-            b.BackColor = Color.OrangeRed;
+            CellButton b = (CellButton)sender;
+            switch (ship)
+            {
+                case 1: // Однопалубный корабль
+                    game.My.AddShip1(b.X, b.Y);
+                    // Перекрасить кнопку
+                    b.BackColor = Color.OrangeRed;
+                    // Отпустить кнопку 
+                    button1.Checked = false;
+                    break;
+            }
+            // Корабль создан
+            ship = 0;
         }
 
         /// <summary>
@@ -118,6 +138,53 @@ namespace AirBattle
         {
             // Закрыть форму
             this.Close();
+        }
+
+        /// <summary>
+        /// Начало создания однопалубного корабля
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ship = 1;
+            // Кнопка "залипла"
+            button1.Checked = true;
+        }
+
+        /// <summary>
+        /// Сохранение состояния игры в файл
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Запросить имя файла
+            if (save.ShowDialog() == DialogResult.OK)
+            {
+                // Сохранить в заданный файл
+                game.Save(save.FileName);
+            }
+        }
+
+        /// <summary>
+        /// Загрузка состояния игры
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (open.ShowDialog() == DialogResult.OK)
+                {
+                    game = Data.Game.Load(open.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Загрузка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
     }
 }
