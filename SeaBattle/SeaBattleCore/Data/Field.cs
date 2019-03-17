@@ -36,5 +36,49 @@ namespace SeaBattle.Data
                 Ships = list.ToArray();
             }
         }
+
+        /// <summary>
+        /// Создание двухпалубного корабля
+        /// </summary>
+        /// <param name="cell">Первая клетка</param>
+        /// <param name="x">Абсцисса второй клетки</param>
+        /// <param name="y">Ордината второй клетки</param>
+        public void AddShip2(Cell cell, int x, int y)
+        {
+            // Создание нового корабля
+            var ship = new Ship(cell, x, y);
+            if (Ships == null)
+            {
+                Ships = new Ship[1] { ship };
+            }
+            else
+            {
+                // Динамическое расширение массива
+                Array.Resize(ref Ships, Ships.Length + 1);
+                // Заполнение последнего элемента массива
+                Ships[Ships.Length - 1] = ship;
+            }
+        }
+
+        /// <summary>
+        /// Проверка доступности клетки для размещения корабля
+        /// </summary>
+        /// <param name="x">Абсцисса</param>
+        /// <param name="y">Ордината</param>
+        /// <returns></returns>
+        public bool CheckAround(int x, int y)
+        {
+            if (Ships != null)
+            {
+                foreach (Ship ship in Ships)
+                {
+                    if (!ship.CheckAround(x, y))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
     }
 }

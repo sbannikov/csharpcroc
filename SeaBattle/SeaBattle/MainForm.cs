@@ -26,6 +26,11 @@ namespace SeaBattle
         private int cells = 0;
 
         /// <summary>
+        /// Первая клетка большого корабля
+        /// </summary>
+        private Data.Cell cell;
+
+        /// <summary>
         /// Конструктор формы по умолчанию
         /// </summary>
         public MainForm()
@@ -67,22 +72,63 @@ namespace SeaBattle
         /// <param name="e"></param>
         private void buttonClick(object sender, EventArgs e)
         {
-            // Приведение типа данных
-            CellButton b = (CellButton)sender;
-            // Расстановка кораблей
-            switch (cells)
+            try
             {
-                case 1: // Однопалубный корабль
-                    // Покрасить кнопку-корабль
-                    b.BackColor = Color.OrangeRed;
-                    // Отлипнуть кнопку
-                    ship1.Checked = false;
-                    // Создать корабль
-                    game.My.AddShip1(b.X, b.Y);
-                    break;
+                // Приведение типа данных
+                CellButton b = (CellButton)sender;
+                // Проверить корректность размещения корабля
+                if (!game.My.CheckAround(b.X, b.Y))
+                {
+                    return;
+                }
+                // Расстановка кораблей
+                switch (cells)
+                {
+                    case 1: // Однопалубный корабль
+                        // Покрасить кнопку-корабль
+                        b.BackColor = Color.OrangeRed;
+                        // Отлипнуть кнопку
+                        ship1.Checked = false;
+                        // Создать корабль
+                        game.My.AddShip1(b.X, b.Y);
+                        // Возврат в основной режим
+                        cells = 0;
+                        break;
+
+                    case 2: // Двухпалубный корабль
+                        if (cell == null)
+                        {
+                            // Запомнить первую клетку
+                            b.BackColor = Color.ForestGreen;
+                            cell = new Data.Cell(b.X, b.Y);
+                        }
+                        else if (!cell.CheckNear(b.X, b.Y))
+                        {
+                            // Нажата некорректная вторая клетка
+                            return;
+                        }
+                        else
+                        {
+                            // Покрасить первую кнопку-корабль
+                            getButton(cell.X, cell.Y).BackColor = Color.OrangeRed;
+                            // Покрасить вторую кнопку-корабль
+                            b.BackColor = Color.OrangeRed;
+                            // Отлипнуть кнопку
+                            ship2.Checked = false;
+                            // Добавить двухпалбный корабль
+                            game.My.AddShip2(cell, b.X, b.Y);
+                            // Сброс отмеченной клетки
+                            cell = null;
+                            // Возврат в основной режим
+                            cells = 0;
+                        }
+                        break;
+                }
             }
-            // Возврат в основной режим
-            cells = 0;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         /// <summary>
@@ -94,6 +140,21 @@ namespace SeaBattle
         {
             // Закрыть главную форму
             this.Close();
+        }
+
+        /// <summary>
+        /// Сохранение игры
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Запрос имени файла
+            if (save.ShowDialog() == DialogResult.OK)
+            {
+                // Сохранение в заданный файл
+                game.Save(save.FileName);
+            }
         }
 
         /// <summary>
@@ -110,18 +171,39 @@ namespace SeaBattle
         }
 
         /// <summary>
-        /// Сохранение игры
+        /// Расстановка двухпалубного корабля
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ship2_Click(object sender, EventArgs e)
         {
-            // Запрос имени файла
-            if (save.ShowDialog() == DialogResult.OK)
-            {                
-                // Сохранение в заданный файл
-                game.Save(save.FileName);
+            // "залипание" кнопки
+            ship2.Checked = true;
+            // Разрешение добавления двухпалубного корабля
+            cells = 2;
+        }
+
+        /// <summary>
+        /// Поиск кнопки по координатам сетки
+        /// </summary>
+        /// <param name="x">Абсцисса</param>
+        /// <param name="y">Ордината</param>
+        /// <returns></returns>
+        private CellButton getButton(int x, int y)
+        {
+            foreach (Control control in Controls)
+            {
+                // Проверка на возможность приведения типа
+                if (!(control is CellButton)) continue;
+                // Приведение типа в явной форме
+                CellButton button = (CellButton)control;
+                // Проверка на совпадение координат
+                if ((button.X == x) && (button.Y == y))
+                {  // Мы нашли нужную кнопку
+                    return button;
+                }
             }
+            return null;
         }
     }
 }

@@ -34,8 +34,11 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tool = new System.Windows.Forms.ToolStrip();
-            this.ship1 = new System.Windows.Forms.ToolStripButton();
             this.save = new System.Windows.Forms.SaveFileDialog();
+            this.ship1 = new System.Windows.Forms.ToolStripButton();
+            this.ship2 = new System.Windows.Forms.ToolStripButton();
+            this.ship3 = new System.Windows.Forms.ToolStripButton();
+            this.ship4 = new System.Windows.Forms.ToolStripButton();
             this.menu.SuspendLayout();
             this.tool.SuspendLayout();
             this.SuspendLayout();
@@ -79,27 +82,66 @@
             // 
             this.tool.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.tool.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ship1});
+            this.ship1,
+            this.ship2,
+            this.ship3,
+            this.ship4});
             this.tool.Location = new System.Drawing.Point(0, 28);
             this.tool.Name = "tool";
-            this.tool.Size = new System.Drawing.Size(461, 27);
+            this.tool.Size = new System.Drawing.Size(461, 31);
             this.tool.TabIndex = 1;
             this.tool.Text = "toolStrip1";
-            // 
-            // ship1
-            // 
-            this.ship1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ship1.Image = ((System.Drawing.Image)(resources.GetObject("ship1.Image")));
-            this.ship1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ship1.Name = "ship1";
-            this.ship1.Size = new System.Drawing.Size(24, 24);
-            this.ship1.Text = "toolStripButton1";
-            this.ship1.Click += new System.EventHandler(this.ship1_Click);
             // 
             // save
             // 
             this.save.Filter = "XML-файлы (*.xml)|*.xml|Все файлы (*.*)|*.*";
             this.save.Title = "Сохранение игры";
+            // 
+            // ship1
+            // 
+            this.ship1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ship1.Image = global::SeaBattle.Properties.Resources.Ship_01;
+            this.ship1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.ship1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ship1.Name = "ship1";
+            this.ship1.Size = new System.Drawing.Size(28, 28);
+            this.ship1.Text = "toolStripButton1";
+            this.ship1.ToolTipText = "Добавление однопалубного корабля";
+            this.ship1.Click += new System.EventHandler(this.ship1_Click);
+            // 
+            // ship2
+            // 
+            this.ship2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ship2.Image = global::SeaBattle.Properties.Resources.Ship_02;
+            this.ship2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.ship2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ship2.Name = "ship2";
+            this.ship2.Size = new System.Drawing.Size(28, 28);
+            this.ship2.Text = "toolStripButton1";
+            this.ship2.ToolTipText = "Добавление двухпалубного корабля";
+            this.ship2.Click += new System.EventHandler(this.ship2_Click);
+            // 
+            // ship3
+            // 
+            this.ship3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ship3.Image = global::SeaBattle.Properties.Resources.Ship_03;
+            this.ship3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.ship3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ship3.Name = "ship3";
+            this.ship3.Size = new System.Drawing.Size(28, 28);
+            this.ship3.Text = "toolStripButton2";
+            this.ship3.ToolTipText = "Добавление трехпалубного корабля";
+            // 
+            // ship4
+            // 
+            this.ship4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ship4.Image = global::SeaBattle.Properties.Resources.Ship_04;
+            this.ship4.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.ship4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ship4.Name = "ship4";
+            this.ship4.Size = new System.Drawing.Size(28, 28);
+            this.ship4.Text = "toolStripButton3";
+            this.ship4.ToolTipText = "Добавление четырехпалубного корабля";
             // 
             // MainForm
             // 
@@ -135,6 +177,9 @@
         private System.Windows.Forms.ToolStripButton ship1;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog save;
+        private System.Windows.Forms.ToolStripButton ship2;
+        private System.Windows.Forms.ToolStripButton ship3;
+        private System.Windows.Forms.ToolStripButton ship4;
     }
 }
 
