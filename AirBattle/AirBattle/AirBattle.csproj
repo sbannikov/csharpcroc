@@ -69,6 +69,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CellButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Data\Cell.cs" />
+    <Compile Include="Data\State.cs" />
+    <Compile Include="Data\Field.cs" />
+    <Compile Include="Data\Game.cs" />
+    <Compile Include="Data\Ship.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
