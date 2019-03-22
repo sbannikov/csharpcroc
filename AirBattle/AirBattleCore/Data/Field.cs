@@ -39,5 +39,26 @@ namespace AirBattle.Data
                 Ships[Ships.Length - 1] = ship;
             }
         }
+
+        /// <summary>
+        /// Проверка доступности клетки
+        /// </summary>
+        /// <param name="x">Абсцисса</param>
+        /// <param name="y">Ордината</param>
+        /// <returns></returns>
+        public bool CheckCellAvail(int x, int y)
+        {
+            if (Ships != null)
+            {
+                foreach (Ship ship in Ships)
+                {
+                    if (!ship.CheckCellAvail(x, y))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
     }
 }

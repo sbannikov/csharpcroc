@@ -16,10 +16,6 @@ namespace AirBattle
     public partial class MainForm : Form
     {
         /// <summary>
-        /// Размер поля
-        /// </summary>
-        private const int n = 10;
-        /// <summary>
         /// Размер кнопки
         /// </summary>
         private const int buttonSize = 48;
@@ -77,9 +73,9 @@ namespace AirBattle
         private void MainForm_Load(object sender, EventArgs e)
         {
             // Формирование квадратного поля
-            for (int x = 1; x <= n; x++)
+            for (int x = 1; x <= Data.Game.FieldSize; x++)
             {
-                for (int y = 1; y <= n; y++)
+                for (int y = 1; y <= Data.Game.FieldSize; y++)
                 {
                     // Создание новой кнопки
                     // Использование инициализатора
@@ -97,7 +93,7 @@ namespace AirBattle
                 }
             }
             // Формирование подписей
-            for (int a = 1; a <= n; a++)
+            for (int a = 1; a <= Data.Game.FieldSize; a++)
             {
                 // Буквенная подпись по горизонтали
                 AddLabel(a, 0, Convert.ToChar(a + Convert.ToInt16('А') - 1).ToString());
@@ -113,20 +109,30 @@ namespace AirBattle
         /// <param name="e"></param>
         private void Button_Click(object sender, EventArgs e)
         {
-            // Приведение типа
-            CellButton b = (CellButton)sender;
-            switch (ship)
+            try
             {
-                case 1: // Однопалубный корабль
-                    game.My.AddShip1(b.X, b.Y);
-                    // Перекрасить кнопку
-                    b.BackColor = Color.OrangeRed;
-                    // Отпустить кнопку 
-                    button1.Checked = false;
-                    break;
+                // Приведение типа
+                CellButton b = (CellButton)sender;
+                switch (ship)
+                {
+                    case 1: // Однопалубный корабль
+                            // Проверка доступности клетки
+                        if (!game.My.CheckCellAvail(b.X, b.Y)) return;
+                        // Добавление корабля
+                        game.My.AddShip1(b.X, b.Y);
+                        // Перекрасить кнопку
+                        b.BackColor = Color.OrangeRed;
+                        // Отпустить кнопку 
+                        button1.Checked = false;
+                        break;
+                }
+                // Корабль создан
+                ship = 0;
             }
-            // Корабль создан
-            ship = 0;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Добавление корабля", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         /// <summary>

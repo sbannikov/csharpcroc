@@ -27,5 +27,18 @@ namespace AirBattle.Data
         /// </summary>
         [XmlAttribute(AttributeName = "state")]
         public State CellState;
+
+        /// <summary>
+        /// Проверка доступности клетки
+        /// </summary>
+        /// <param name="x">Абсцисса</param>
+        /// <param name="y">Ордината</param>
+        /// <returns></returns>
+        public bool CheckCellAvail(int x, int y)
+        {
+            int dist = Math.Max(Math.Abs(X - x), Math.Abs(Y - y));
+            return dist > 1;
+
+        }
     }
 }

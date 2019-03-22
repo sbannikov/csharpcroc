@@ -31,13 +31,16 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menu = new System.Windows.Forms.MenuStrip();
             this.FileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tool = new System.Windows.Forms.ToolStrip();
             this.button1 = new System.Windows.Forms.ToolStripButton();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.save = new System.Windows.Forms.SaveFileDialog();
-            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.open = new System.Windows.Forms.OpenFileDialog();
+            this.button2 = new System.Windows.Forms.ToolStripButton();
+            this.button3 = new System.Windows.Forms.ToolStripButton();
+            this.button4 = new System.Windows.Forms.ToolStripButton();
             this.menu.SuspendLayout();
             this.tool.SuspendLayout();
             this.SuspendLayout();
@@ -64,6 +67,21 @@
             this.FileToolStripMenuItem.Size = new System.Drawing.Size(57, 24);
             this.FileToolStripMenuItem.Text = "&Файл";
             // 
+            // loadToolStripMenuItem
+            // 
+            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(217, 26);
+            this.loadToolStripMenuItem.Text = "Загрузить...";
+            this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(217, 26);
+            this.saveToolStripMenuItem.Text = "Сохранить...";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
@@ -75,7 +93,10 @@
             // 
             this.tool.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.tool.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.button1});
+            this.button1,
+            this.button2,
+            this.button3,
+            this.button4});
             this.tool.Location = new System.Drawing.Point(0, 28);
             this.tool.Name = "tool";
             this.tool.Size = new System.Drawing.Size(355, 27);
@@ -85,37 +106,52 @@
             // button1
             // 
             this.button1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Image = global::AirBattle.Properties.Resources.ship01;
             this.button1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(24, 24);
             this.button1.ToolTipText = "Расстановка однопалубного корабля";
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // saveToolStripMenuItem
-            // 
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(217, 26);
-            this.saveToolStripMenuItem.Text = "Сохранить...";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
-            // 
             // save
             // 
             this.save.Filter = "XML-файлы(*.xml)|*.xml|Все файлы (*.*)|*.*";
             this.save.Title = "Сохранение состояния игры";
             // 
-            // loadToolStripMenuItem
-            // 
-            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(217, 26);
-            this.loadToolStripMenuItem.Text = "Загрузить...";
-            this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
-            // 
             // open
             // 
             this.open.Filter = "XML-файлы(*.xml)|*.xml|Все файлы (*.*)|*.*";
             this.open.Title = "Загрузка состояния игры";
+            // 
+            // button2
+            // 
+            this.button2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.button2.Image = global::AirBattle.Properties.Resources.ship02;
+            this.button2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(24, 24);
+            this.button2.Text = "toolStripButton1";
+            this.button2.ToolTipText = "Расстановка двухпалубного корабля";
+            // 
+            // button3
+            // 
+            this.button3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.button3.Image = global::AirBattle.Properties.Resources.ship03;
+            this.button3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(24, 24);
+            this.button3.Text = "toolStripButton2";
+            this.button3.ToolTipText = "Расстановка трехпалубного корабля";
+            // 
+            // button4
+            // 
+            this.button4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.button4.Image = global::AirBattle.Properties.Resources.ship04;
+            this.button4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(24, 24);
+            this.button4.Text = "toolStripButton3";
+            this.button4.ToolTipText = "Расстановка четырехпалубного корабля";
             // 
             // MainForm
             // 
@@ -128,7 +164,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menu;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Воздушный бой";
@@ -153,6 +189,9 @@
         private System.Windows.Forms.SaveFileDialog save;
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog open;
+        private System.Windows.Forms.ToolStripButton button2;
+        private System.Windows.Forms.ToolStripButton button3;
+        private System.Windows.Forms.ToolStripButton button4;
     }
 }
 

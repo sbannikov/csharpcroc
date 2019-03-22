@@ -72,11 +72,6 @@
     <Compile Include="CellButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Data\Cell.cs" />
-    <Compile Include="Data\State.cs" />
-    <Compile Include="Data\Field.cs" />
-    <Compile Include="Data\Game.cs" />
-    <Compile Include="Data\Ship.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +91,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -111,6 +107,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Pictures\01.png" />
+    <Content Include="Pictures\02.png" />
+    <Content Include="Pictures\03.png" />
+    <Content Include="Pictures\04.png" />
     <Content Include="iconfinder_hotair_1055044.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +124,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AirBattleCore\AirBattleCore.csproj">
+      <Project>{25b255c9-4f0a-46a9-ab83-2180bc265a48}</Project>
+      <Name>AirBattleCore</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

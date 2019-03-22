@@ -40,5 +40,26 @@ namespace AirBattle.Data
             // Создание массива из одной клетки
             Cells = new Cell[1] { cell };
         }
+
+        /// <summary>
+        /// Проверка доступности клетки
+        /// </summary>
+        /// <param name="x">Абсцисса</param>
+        /// <param name="y">Ордината</param>
+        /// <returns></returns>
+        public bool CheckCellAvail(int x, int y)
+        {
+            if (Cells != null)
+            {
+                foreach (Cell cell in Cells)
+                {
+                    if (!cell.CheckCellAvail(x, y))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
     }
 }

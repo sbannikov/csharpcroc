@@ -15,6 +15,11 @@ namespace AirBattle.Data
     public class Game
     {
         /// <summary>
+        /// Размер поля
+        /// </summary>
+        public const int FieldSize = 10;
+
+        /// <summary>
         /// Моё поле
         /// </summary>
         public Field My;
