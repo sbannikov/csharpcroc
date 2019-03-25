@@ -63,6 +63,12 @@ namespace SeaBattle
                     Controls.Add(b);
                 }
             }
+            // Учет высоты строки состояний
+            Height += status.Height;
+            // Интервал срабатывания таймера из конфигурации
+            timer.Interval = Properties.Settings.Default.Interval;
+            // Включение таймера
+            timer.Enabled = true;
         }
 
         /// <summary>
@@ -204,6 +210,40 @@ namespace SeaBattle
                 }
             }
             return null;
+        }
+
+        /// <summary>
+        /// Событие срабатывания таймера
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                // Временно отключаем таймер
+                timer.Enabled = false;
+                // Обновление метки времени
+                Program.db.Register();
+                // Отражение активности в строке состояния
+                timerLabel.Text = timerLabel.Text == "*" ? "." : "*";
+            }
+            finally
+            {
+                // Обратно включаем таймер
+                timer.Enabled = true;
+            }
+        }
+
+        /// <summary>
+        /// Событие перед закрытием главного окна
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Выключение таймера
+            timer.Enabled = false;
         }
     }
 }

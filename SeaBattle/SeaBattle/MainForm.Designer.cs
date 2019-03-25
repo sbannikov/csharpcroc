@@ -28,19 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menu = new System.Windows.Forms.MenuStrip();
             this.FileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tool = new System.Windows.Forms.ToolStrip();
-            this.save = new System.Windows.Forms.SaveFileDialog();
             this.ship1 = new System.Windows.Forms.ToolStripButton();
             this.ship2 = new System.Windows.Forms.ToolStripButton();
             this.ship3 = new System.Windows.Forms.ToolStripButton();
             this.ship4 = new System.Windows.Forms.ToolStripButton();
+            this.save = new System.Windows.Forms.SaveFileDialog();
+            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.status = new System.Windows.Forms.StatusStrip();
+            this.timerLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.menu.SuspendLayout();
             this.tool.SuspendLayout();
+            this.status.SuspendLayout();
             this.SuspendLayout();
             // 
             // menu
@@ -67,14 +72,14 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.saveToolStripMenuItem.Text = "&Сохранить...";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.ExitToolStripMenuItem.Text = "&Выход";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -91,11 +96,6 @@
             this.tool.Size = new System.Drawing.Size(461, 31);
             this.tool.TabIndex = 1;
             this.tool.Text = "toolStrip1";
-            // 
-            // save
-            // 
-            this.save.Filter = "XML-файлы (*.xml)|*.xml|Все файлы (*.*)|*.*";
-            this.save.Title = "Сохранение игры";
             // 
             // ship1
             // 
@@ -143,12 +143,39 @@
             this.ship4.Text = "toolStripButton3";
             this.ship4.ToolTipText = "Добавление четырехпалубного корабля";
             // 
+            // save
+            // 
+            this.save.Filter = "XML-файлы (*.xml)|*.xml|Все файлы (*.*)|*.*";
+            this.save.Title = "Сохранение игры";
+            // 
+            // timer
+            // 
+            this.timer.Interval = 2000;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // status
+            // 
+            this.status.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.status.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.timerLabel});
+            this.status.Location = new System.Drawing.Point(0, 324);
+            this.status.Name = "status";
+            this.status.Size = new System.Drawing.Size(461, 24);
+            this.status.SizingGrip = false;
+            this.status.TabIndex = 2;
+            // 
+            // timerLabel
+            // 
+            this.timerLabel.Name = "timerLabel";
+            this.timerLabel.Size = new System.Drawing.Size(0, 19);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(461, 348);
+            this.Controls.Add(this.status);
             this.Controls.Add(this.tool);
             this.Controls.Add(this.menu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -158,11 +185,14 @@
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Морской бой";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
             this.tool.ResumeLayout(false);
             this.tool.PerformLayout();
+            this.status.ResumeLayout(false);
+            this.status.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -180,6 +210,9 @@
         private System.Windows.Forms.ToolStripButton ship2;
         private System.Windows.Forms.ToolStripButton ship3;
         private System.Windows.Forms.ToolStripButton ship4;
+        private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.StatusStrip status;
+        private System.Windows.Forms.ToolStripStatusLabel timerLabel;
     }
 }
 

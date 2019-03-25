@@ -72,6 +72,7 @@
     <Compile Include="CellButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Database\Database.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
