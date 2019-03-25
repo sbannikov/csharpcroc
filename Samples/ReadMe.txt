@@ -15,6 +15,10 @@ ConsoleThreads
 * Microsoft.NET Framework, консольное приложение
 - многопоточное консольное приложение c демонстрацией блокировки потоков через lock
 
+ExcelSample
+* Microsoft.NET Framework, Microsoft Excel VSTO add-in
+- пример работы с файлом Microsoft Excel
+
 LogicForm
 * Microsoft.NET Framework, Windows Forms
 - простой дизайнер логических схем
