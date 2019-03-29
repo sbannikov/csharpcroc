@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicForm", "LogicForm\Logi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelSample", "ExcelSample\ExcelSample.csproj", "{A19D4DF3-2F6C-48BC-9837-0F47C903711D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleUdf", "SampleUdf\SampleUdf.csproj", "{018FE34F-F377-483A-B080-2F2E9F8B919A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +58,10 @@ Global
 		{A19D4DF3-2F6C-48BC-9837-0F47C903711D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A19D4DF3-2F6C-48BC-9837-0F47C903711D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A19D4DF3-2F6C-48BC-9837-0F47C903711D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{018FE34F-F377-483A-B080-2F2E9F8B919A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{018FE34F-F377-483A-B080-2F2E9F8B919A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{018FE34F-F377-483A-B080-2F2E9F8B919A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{018FE34F-F377-483A-B080-2F2E9F8B919A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

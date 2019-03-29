@@ -100,6 +100,12 @@ namespace AirBattle
                 // Цифровая подпись по вертикали
                 AddLabel(0, a, (a - 1).ToString());
             }
+            // Коррекция высоты формы
+            Height += status.Height;
+            // Интервал таймера из конфигурации
+            timer.Interval = Properties.Settings.Default.Interval;
+            // Включение таймера
+            timer.Enabled = true;
         }
 
         /// <summary>
@@ -191,6 +197,30 @@ namespace AirBattle
             {
                 MessageBox.Show(ex.Message, "Загрузка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+        }
+
+        /// <summary>
+        /// Обработчик таймера
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            // Обновление метки времени в базе
+            Program.db.Register();
+            // Индикация активности
+            timerLabel.Text = (timerLabel.Text == "*") ? "." : "*";
+        }
+
+        /// <summary>
+        /// Событие попытки закрытия формы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Отключение таймера
+            timer.Enabled = false;
         }
     }
 }

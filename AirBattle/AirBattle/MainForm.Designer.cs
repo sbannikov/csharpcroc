@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menu = new System.Windows.Forms.MenuStrip();
             this.FileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -36,13 +37,17 @@
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tool = new System.Windows.Forms.ToolStrip();
             this.button1 = new System.Windows.Forms.ToolStripButton();
-            this.save = new System.Windows.Forms.SaveFileDialog();
-            this.open = new System.Windows.Forms.OpenFileDialog();
             this.button2 = new System.Windows.Forms.ToolStripButton();
             this.button3 = new System.Windows.Forms.ToolStripButton();
             this.button4 = new System.Windows.Forms.ToolStripButton();
+            this.save = new System.Windows.Forms.SaveFileDialog();
+            this.open = new System.Windows.Forms.OpenFileDialog();
+            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.status = new System.Windows.Forms.StatusStrip();
+            this.timerLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.menu.SuspendLayout();
             this.tool.SuspendLayout();
+            this.status.SuspendLayout();
             this.SuspendLayout();
             // 
             // menu
@@ -113,16 +118,6 @@
             this.button1.ToolTipText = "Расстановка однопалубного корабля";
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // save
-            // 
-            this.save.Filter = "XML-файлы(*.xml)|*.xml|Все файлы (*.*)|*.*";
-            this.save.Title = "Сохранение состояния игры";
-            // 
-            // open
-            // 
-            this.open.Filter = "XML-файлы(*.xml)|*.xml|Все файлы (*.*)|*.*";
-            this.open.Title = "Загрузка состояния игры";
-            // 
             // button2
             // 
             this.button2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -153,12 +148,46 @@
             this.button4.Text = "toolStripButton3";
             this.button4.ToolTipText = "Расстановка четырехпалубного корабля";
             // 
+            // save
+            // 
+            this.save.Filter = "XML-файлы(*.xml)|*.xml|Все файлы (*.*)|*.*";
+            this.save.Title = "Сохранение состояния игры";
+            // 
+            // open
+            // 
+            this.open.Filter = "XML-файлы(*.xml)|*.xml|Все файлы (*.*)|*.*";
+            this.open.Title = "Загрузка состояния игры";
+            // 
+            // timer
+            // 
+            this.timer.Interval = 1000;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // status
+            // 
+            this.status.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.status.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.timerLabel});
+            this.status.Location = new System.Drawing.Point(0, 277);
+            this.status.Name = "status";
+            this.status.Size = new System.Drawing.Size(355, 25);
+            this.status.SizingGrip = false;
+            this.status.TabIndex = 2;
+            this.status.Text = "statusStrip1";
+            // 
+            // timerLabel
+            // 
+            this.timerLabel.Name = "timerLabel";
+            this.timerLabel.Size = new System.Drawing.Size(15, 20);
+            this.timerLabel.Text = "*";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(355, 302);
+            this.Controls.Add(this.status);
             this.Controls.Add(this.tool);
             this.Controls.Add(this.menu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -168,11 +197,14 @@
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Воздушный бой";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
             this.tool.ResumeLayout(false);
             this.tool.PerformLayout();
+            this.status.ResumeLayout(false);
+            this.status.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -192,6 +224,9 @@
         private System.Windows.Forms.ToolStripButton button2;
         private System.Windows.Forms.ToolStripButton button3;
         private System.Windows.Forms.ToolStripButton button4;
+        private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.StatusStrip status;
+        private System.Windows.Forms.ToolStripStatusLabel timerLabel;
     }
 }
 

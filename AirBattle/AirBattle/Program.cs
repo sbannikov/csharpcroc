@@ -15,13 +15,31 @@ namespace AirBattle
     static class Program
     {
         /// <summary>
+        /// База данных
+        /// </summary>
+        static internal Storage.Database db;
+
+        /// <summary>
         /// Точка входа в приложение
         /// </summary>        
         [STAThread()]
         static void Main()
         {
-            // Запуск главной формы программы
-            Application.Run(new MainForm());
+            try
+            {
+                // База данных
+                using (db = new Storage.Database())
+                {
+                    // Регистрация клиента в базе данных
+                    db.Register();
+                    // Запуск главной формы программы
+                    Application.Run(new MainForm());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Воздушный бой", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
     }
 }

@@ -80,6 +80,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Storage\Database.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -112,6 +113,7 @@
     <Content Include="Pictures\03.png" />
     <Content Include="Pictures\04.png" />
     <Content Include="iconfinder_hotair_1055044.ico" />
+    <Content Include="Storage\Session.sql" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">

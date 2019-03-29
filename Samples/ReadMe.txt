@@ -29,6 +29,9 @@ Piano
 * Microsoft.NET Framework, Windows Forms
 - электронное пианино (динамическая генерация клавиш, четыре октавы, многоголосное)
 
+SampleUdf
+* Microsoft.NET Framework, Microsoft SQL Server User Defined Function (CLR)
+
 SnmpReaderService
 * Microsoft.NET Framework, служба операционной системы
 - служба операционной системы, чтение данных по протоколу SNMP
