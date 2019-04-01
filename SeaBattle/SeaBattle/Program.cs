@@ -12,9 +12,9 @@ namespace SeaBattle
     static class Program
     {
         /// <summary>
-        /// База данных
+        /// База данных 
         /// </summary>
-        static internal Database.Database db;
+        static internal Database.IDatabase db;
 
         /// <summary>
         /// Точка входа в приложение
@@ -23,9 +23,9 @@ namespace SeaBattle
         static void Main()
         {
             try
-            {
+            {               
                 // Создание базы данных
-                using (db = new Database.Database())
+                using (db = new Database.BATTLEEntities())
                 {
                     // Регистрация сеанса
                     db.Register();
@@ -35,8 +35,30 @@ namespace SeaBattle
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+               ShowException(ex);
             }
+        }
+
+        /// <summary>
+        /// Вывод на экран сведения об исключении
+        /// </summary>
+        /// <param name="ex">Исключение</param>
+        internal static void ShowException(Exception ex)
+        {
+            // Текст внешнего исключения
+            string m = ex.GetType().FullName + ": " + ex.Message;
+            // Собираем тексты всех вложенных исключений
+            while (ex.InnerException != null)
+            {
+                ex = ex.InnerException;
+                // Перевод строки
+                m += System.Environment.NewLine;
+                m += System.Environment.NewLine;
+                // Текст исключения
+                m += $"{ex.GetType().FullName} : {ex.Message}";
+            }
+            // Выводим полное сообщение об ошибке
+            MessageBox.Show(m, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);            
         }
     }
 }

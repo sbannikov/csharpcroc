@@ -10,7 +10,7 @@ namespace SeaBattle.Database
     /// <summary>
     /// Служебная база данных
     /// </summary>
-    public sealed class Database : IDisposable
+    public sealed class Database : IDatabase, IDisposable
     {
         /// <summary>
         /// Соединение с базой данных
@@ -66,7 +66,7 @@ namespace SeaBattle.Database
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     // Вставка данных
-                    cmd.CommandText = "INSERT INTO [Sessions] ([ComputerName], [TimeStamp]) VALUES (@name, @now)";
+                    cmd.CommandText = "INSERT INTO [Sessions] ([ComputerName], [TimeStamp], [Description]) VALUES (@name, @now, '')";
                     cmd.Parameters.AddWithValue("name", conn.WorkstationId);
                     cmd.Parameters.AddWithValue("now", now);
                     cmd.ExecuteNonQuery();
