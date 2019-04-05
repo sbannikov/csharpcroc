@@ -23,9 +23,11 @@ namespace SeaBattle
         static void Main()
         {
             try
-            {               
+            {
                 // Создание базы данных
-                using (db = new Database.BATTLEEntities())
+                // См. также
+                // https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1063-implement-idisposable-correctly
+                using ((IDisposable)(db = new Database.SeaBattleEntities()))
                 {
                     // Регистрация сеанса
                     db.Register();

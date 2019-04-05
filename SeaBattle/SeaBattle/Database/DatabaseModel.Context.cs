@@ -13,10 +13,10 @@ namespace SeaBattle.Database
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BATTLEEntities : DbContext
+    public partial class SeaBattleEntities : DbContext
     {
-        public BATTLEEntities()
-            : base("name=BATTLEEntities")
+        public SeaBattleEntities()
+            : base("name=SeaBattleEntities")
         {
         }
     

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SeaBattle.Database
 {
-    partial class BATTLEEntities : IDatabase
+    partial class SeaBattleEntities : IDatabase
     {
         /// <summary>
         /// Регистрация сеанса в базе данных

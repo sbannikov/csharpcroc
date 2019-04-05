@@ -81,7 +81,7 @@
     <Compile Include="CellButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Database\BATTLEEntities.cs" />
+    <Compile Include="Database\SeaBattleEntities.cs" />
     <Compile Include="Database\Database.cs" />
     <Compile Include="Database\DatabaseModel.Context.cs">
       <AutoGen>True</AutoGen>

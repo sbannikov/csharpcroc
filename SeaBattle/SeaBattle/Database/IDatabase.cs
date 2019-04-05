@@ -9,7 +9,7 @@ namespace SeaBattle.Database
     /// <summary>
     /// База данных
     /// </summary>
-    public interface IDatabase : IDisposable
+    public interface IDatabase
     {
         /// <summary>
         /// Регистрация сеанса в базе данных

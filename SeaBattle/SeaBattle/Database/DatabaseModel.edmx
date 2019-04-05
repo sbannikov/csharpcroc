@@ -28,7 +28,7 @@
           <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="127" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityContainer Name="BATTLEEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="SeaBattleEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Sessions" EntityType="Self.Sessions" />
         </EntityContainer>
       </Schema>
@@ -36,7 +36,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="BattleModelStoreContainer" CdmEntityContainer="BATTLEEntities">
+        <EntityContainerMapping StorageEntityContainer="BattleModelStoreContainer" CdmEntityContainer="SeaBattleEntities">
           <EntitySetMapping Name="Sessions">
             <EntityTypeMapping TypeName="BattleModel.Sessions">
               <MappingFragment StoreEntitySet="Sessions">
