@@ -42,6 +42,24 @@ namespace AirBattle.Data
         }
 
         /// <summary>
+        /// Конструктор двухпалубного корабля
+        /// </summary>
+        /// <param name="cell">Первая клетка</param>
+        /// <param name="x">Абсцисса</param>
+        /// <param name="y">Ордината</param>
+        public Ship(Cell cell , int x, int y)
+        {
+            // Создание новой клетки
+            var cell2 = new Cell()
+            {
+                X = x,
+                Y = y,
+                CellState = State.Active
+            };
+            // Создание массива из двух клеток
+            Cells = new Cell[2] { cell, cell2 };
+        }
+        /// <summary>
         /// Проверка доступности клетки
         /// </summary>
         /// <param name="x">Абсцисса</param>

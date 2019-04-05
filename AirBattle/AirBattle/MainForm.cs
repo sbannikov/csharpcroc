@@ -24,6 +24,10 @@ namespace AirBattle
         /// </summary>
         private int ship;
         /// <summary>
+        /// Первая клетка большого корабля
+        /// </summary>
+        private Data.Cell cell;
+        /// <summary>
         /// Состояние игры
         /// </summary>
         private Data.Game game;
@@ -119,21 +123,51 @@ namespace AirBattle
             {
                 // Приведение типа
                 CellButton b = (CellButton)sender;
+                // Проверка доступности клетки
+                if (!game.My.CheckCellAvail(b.X, b.Y)) return;
+                // Определение режима работы
                 switch (ship)
                 {
                     case 1: // Однопалубный корабль
-                            // Проверка доступности клетки
-                        if (!game.My.CheckCellAvail(b.X, b.Y)) return;
                         // Добавление корабля
                         game.My.AddShip1(b.X, b.Y);
                         // Перекрасить кнопку
                         b.BackColor = Color.OrangeRed;
                         // Отпустить кнопку 
                         button1.Checked = false;
+                        // Корабль создан
+                        ship = 0;
                         break;
-                }
-                // Корабль создан
-                ship = 0;
+
+                    case 2: // Двухпалубный корабль
+                        if (cell == null)
+                        {
+                            // Покрасить первую кнопку
+                            b.BackColor = Color.Orchid;
+                            // Запомнить первую клетку
+                            cell = new Data.Cell(b.X, b.Y);
+                        }
+                        else if (!cell.CheckCellNear(b.X, b.Y))
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            // Покрасить первую кнопку
+                            getButton(cell.X, cell.Y).BackColor= Color.OrangeRed;
+                            // Покрасить вторую кнопку
+                            b.BackColor = Color.OrangeRed;
+                            // Добавить корабль
+                            game.My.AddShip2(cell, b.X, b.Y);
+                            // Кнопка "отлипла"
+                            button2.Checked = false;
+                            // Забыть клетку, которую мы запомнили
+                            cell = null;
+                            // Корабль создан
+                            ship = 0;
+                        }
+                        break;
+                }               
             }
             catch (Exception ex)
             {
@@ -162,6 +196,18 @@ namespace AirBattle
             ship = 1;
             // Кнопка "залипла"
             button1.Checked = true;
+        }
+
+        /// <summary>
+        /// Начало создания двухпалубного корабля
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ship = 2;
+            // Кнопка "залипла"
+            button2.Checked = true;
         }
 
         /// <summary>
@@ -221,6 +267,30 @@ namespace AirBattle
         {
             // Отключение таймера
             timer.Enabled = false;
+        }
+        /// <summary>
+        /// Найти кнопку по координатам
+        /// </summary>
+        /// <param name="x">Абсцисса</param>
+        /// <param name="y">Ордината</param>
+        /// <returns></returns>
+        private CellButton getButton(int x, int y)
+        {
+            foreach (Control control in Controls)
+            {
+                // Проверка на соответствие типа
+                if (!(control is CellButton)) continue;
+                // Приведение типа в явной форме
+                CellButton button = (CellButton)control;
+                // Проверка на совпадение координат
+                if ((button.X == x) && (button.Y == y))
+                {
+                    // Мы нашли нужную кнопку
+                    return button;
+                }
+            }
+            // Кнопка не найдена
+            return null;
         }
     }
 }
