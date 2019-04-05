@@ -17,7 +17,7 @@ namespace AirBattle
         /// <summary>
         /// База данных
         /// </summary>
-        static internal Storage.Database db;
+        static internal Storage.IDatabase db;
 
         /// <summary>
         /// Точка входа в приложение
@@ -27,8 +27,10 @@ namespace AirBattle
         {
             try
             {
-                // База данных
-                using (db = new Storage.Database())
+                // База данных ADO.NET или Entity Framework
+                // см. также 
+                // https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1063-implement-idisposable-correctly
+                using ((IDisposable)(db = new Storage.Database()))
                 {
                     // Регистрация клиента в базе данных
                     db.Register();

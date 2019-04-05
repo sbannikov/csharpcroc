@@ -10,7 +10,7 @@ namespace AirBattle.Storage
     /// <summary>
     /// База данных при помощи ADO.NET
     /// </summary>
-    public sealed class Database : IDisposable
+    public sealed class Database : IDisposable, IDatabase
     {
         /// <summary>
         /// Соединение с базой данных
