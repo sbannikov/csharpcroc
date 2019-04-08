@@ -245,5 +245,38 @@ namespace SeaBattle
             // Выключение таймера
             timer.Enabled = false;
         }
+
+        /// <summary>
+        /// Начало игры
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void startToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Создание формы
+                var form = new ChoosePlayerForm();
+                // Если сделан выбор из формы
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    // Выбранный игрок в списке
+                    Database.Sessions s = (Database.Sessions)form.list.SelectedItem;
+                    string uri = $"http://{s.ComputerName}:8888/SeaBattle/GameService/";
+                    // Клиент сервиса
+                    var client = new GameClient.GameServiceClient();
+                    client.Endpoint.Address = new System.ServiceModel.EndpointAddress(uri);
+                    client.Open();
+                    // Запрос имени игрока
+                    string name = client.GetName();
+                    // Вывод на экран
+                    MessageBox.Show(name);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

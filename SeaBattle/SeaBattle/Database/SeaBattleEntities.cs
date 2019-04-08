@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SeaBattle.Database
 {
     partial class SeaBattleEntities : IDatabase
-    {
+    {       
         /// <summary>
         /// Регистрация сеанса в базе данных
         /// </summary>
@@ -46,5 +46,22 @@ namespace SeaBattle.Database
             // Запись изменений в базу данных
             SaveChanges();
         }
+
+        /// <summary>
+        /// Список игроков
+        /// </summary>
+        /// <returns></returns>
+        public List<Sessions> PlayerList()
+        {
+            // Текущая дата
+            DateTime dateTime = DateTime.Now;
+            // На пять минут в прошлое
+            dateTime = dateTime.AddMinutes(-5);
+            // Список текущих игроков по убыванию времени 
+            return Sessions
+                .Where(a => a.TimeStamp >= dateTime)
+                .OrderByDescending(a=> a.TimeStamp).ToList();
+        }
+
     }
 }

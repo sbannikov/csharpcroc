@@ -43,6 +43,8 @@
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.status = new System.Windows.Forms.StatusStrip();
             this.timerLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             this.tool.SuspendLayout();
             this.status.SuspendLayout();
@@ -52,7 +54,8 @@
             // 
             this.menu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.FileToolStripMenuItem});
+            this.FileToolStripMenuItem,
+            this.gameToolStripMenuItem});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
             this.menu.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
@@ -72,14 +75,14 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
             this.saveToolStripMenuItem.Text = "&Сохранить...";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
             this.ExitToolStripMenuItem.Text = "&Выход";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -158,16 +161,31 @@
             this.status.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.status.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.timerLabel});
-            this.status.Location = new System.Drawing.Point(0, 324);
+            this.status.Location = new System.Drawing.Point(0, 326);
             this.status.Name = "status";
-            this.status.Size = new System.Drawing.Size(461, 24);
+            this.status.Size = new System.Drawing.Size(461, 22);
             this.status.SizingGrip = false;
             this.status.TabIndex = 2;
             // 
             // timerLabel
             // 
             this.timerLabel.Name = "timerLabel";
-            this.timerLabel.Size = new System.Drawing.Size(0, 19);
+            this.timerLabel.Size = new System.Drawing.Size(0, 17);
+            // 
+            // gameToolStripMenuItem
+            // 
+            this.gameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.startToolStripMenuItem});
+            this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
+            this.gameToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
+            this.gameToolStripMenuItem.Text = "&Игра";
+            // 
+            // startToolStripMenuItem
+            // 
+            this.startToolStripMenuItem.Name = "startToolStripMenuItem";
+            this.startToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.startToolStripMenuItem.Text = "&Начать...";
+            this.startToolStripMenuItem.Click += new System.EventHandler(this.startToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -213,6 +231,8 @@
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.StatusStrip status;
         private System.Windows.Forms.ToolStripStatusLabel timerLabel;
+        private System.Windows.Forms.ToolStripMenuItem gameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem;
     }
 }
 

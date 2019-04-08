@@ -82,5 +82,10 @@ namespace SeaBattle.Database
             // Закрытие соединения
             conn.Close();
         }
+
+        public List<Sessions> PlayerList()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

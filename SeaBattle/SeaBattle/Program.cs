@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.ServiceModel;
 
 namespace SeaBattle
 {
@@ -15,6 +16,21 @@ namespace SeaBattle
         /// База данных 
         /// </summary>
         static internal Database.IDatabase db;
+
+        /// <summary>
+        /// Сервис
+        /// </summary>
+        static internal GameService svc;
+
+        /// <summary>
+        /// Домик для сервиса
+        /// </summary>
+        static internal ServiceHost host;
+
+        /// <summary>
+        /// Главная форма
+        /// </summary>
+        static internal MainForm form;
 
         /// <summary>
         /// Точка входа в приложение
@@ -31,13 +47,26 @@ namespace SeaBattle
                 {
                     // Регистрация сеанса
                     db.Register();
-                    // Запуск главной формы
-                    Application.Run(new MainForm());
+                    // Создание нового сервиса
+                    svc = new GameService();
+                    // Создание нового хоста для сервиса
+                    host = new ServiceHost(svc);
+                    // Создание главной формы
+                    form = new MainForm();
+                    // Запуск сервиса
+                    host.Open();
+                    // Запуск главной формы                    
+                    Application.Run(form);
                 }
             }
             catch (Exception ex)
             {
-               ShowException(ex);
+                ShowException(ex);
+            }
+            finally
+            {
+                // Останов сервиса
+                host.Close();
             }
         }
 

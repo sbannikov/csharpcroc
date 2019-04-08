@@ -15,5 +15,11 @@ namespace SeaBattle.Database
         /// Регистрация сеанса в базе данных
         /// </summary>
         void Register();
+
+        /// <summary>
+        /// Список игроков
+        /// </summary>
+        /// <returns></returns>
+        List<Sessions> PlayerList();
     }
 }
