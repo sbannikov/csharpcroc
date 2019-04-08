@@ -18,11 +18,6 @@ namespace SeaBattle
         static internal Database.IDatabase db;
 
         /// <summary>
-        /// Сервис
-        /// </summary>
-        static internal GameService svc;
-
-        /// <summary>
         /// Домик для сервиса
         /// </summary>
         static internal ServiceHost host;
@@ -47,14 +42,16 @@ namespace SeaBattle
                 {
                     // Регистрация сеанса
                     db.Register();
-                    // Создание нового сервиса
-                    svc = new GameService();
-                    // Создание нового хоста для сервиса
-                    host = new ServiceHost(svc);
                     // Создание главной формы
                     form = new MainForm();
-                    // Запуск сервиса
-                    host.Open();
+                    // Запуск сервиса в отдельном потоке 
+                    Task.Factory.StartNew(() =>
+                    {
+                        // Создание нового сервиса и хостинга для него
+                        host = new ServiceHost(new GameService());
+                        // Запуск сервиса
+                        host.Open();
+                    });
                     // Запуск главной формы                    
                     Application.Run(form);
                 }
@@ -65,8 +62,12 @@ namespace SeaBattle
             }
             finally
             {
-                // Останов сервиса
-                host.Close();
+                // Проверка на сущестование хостинга
+                if (host != null)
+                {
+                    // Останов сервиса
+                    host.Close();
+                }
             }
         }
 
@@ -83,13 +84,13 @@ namespace SeaBattle
             {
                 ex = ex.InnerException;
                 // Перевод строки
-                m += System.Environment.NewLine;
-                m += System.Environment.NewLine;
+                m += Environment.NewLine;
+                m += Environment.NewLine;
                 // Текст исключения
                 m += $"{ex.GetType().FullName} : {ex.Message}";
             }
             // Выводим полное сообщение об ошибке
-            MessageBox.Show(m, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);            
+            MessageBox.Show(m, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
     }
 }

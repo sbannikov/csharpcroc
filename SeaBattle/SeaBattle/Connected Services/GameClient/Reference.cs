@@ -17,9 +17,6 @@ namespace SeaBattle.GameClient {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetName", ReplyAction="http://tempuri.org/IGameService/GetNameResponse")]
         string GetName();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetName", ReplyAction="http://tempuri.org/IGameService/GetNameResponse")]
-        System.Threading.Tasks.Task<string> GetNameAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -51,10 +48,6 @@ namespace SeaBattle.GameClient {
         
         public string GetName() {
             return base.Channel.GetName();
-        }
-        
-        public System.Threading.Tasks.Task<string> GetNameAsync() {
-            return base.Channel.GetNameAsync();
         }
     }
 }

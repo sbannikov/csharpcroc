@@ -2,7 +2,6 @@
 <ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="fde136c1-053c-4766-9431-9abb2159a922" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
-    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
     <EnableDataBinding>true</EnableDataBinding>
     <ExcludedTypes />
     <ImportXmlTypes>false</ImportXmlTypes>
@@ -19,13 +18,12 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://olimp-423-teach:8888/SeaBattle/GameService/" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:8888/SeaBattle/GameService/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="775ea548-afd3-4c73-9a04-dc0cc8ac35d8" SourceId="1" SourceUrl="http://olimp-423-teach:8888/SeaBattle/GameService/?xsd=xsd0" />
-    <MetadataFile FileName="item21.xsd" MetadataType="Schema" ID="48a4ca1a-8920-472b-a47d-b8f40f48010d" SourceId="1" SourceUrl="http://olimp-423-teach:8888/SeaBattle/GameService/?xsd=xsd1" />
-    <MetadataFile FileName="item1.disco" MetadataType="Disco" ID="52160188-511e-48a1-8e42-ed8d30a3fa2a" SourceId="1" SourceUrl="http://olimp-423-teach:8888/SeaBattle/GameService/?disco" />
-    <MetadataFile FileName="GameService1.wsdl" MetadataType="Wsdl" ID="ec66e355-d026-4f51-9210-e544f82f41b4" SourceId="1" SourceUrl="http://olimp-423-teach:8888/SeaBattle/GameService/?wsdl" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="75e7660b-7359-4eab-90de-43e1e1910a99" SourceId="1" SourceUrl="http://localhost:8888/SeaBattle/GameService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="c322a2cb-1193-40fc-99ac-907de1b12aee" SourceId="1" SourceUrl="http://localhost:8888/SeaBattle/GameService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="a0c43ed8-3cdf-4daf-a16d-5db9674b5cab" SourceId="1" SourceUrl="http://localhost:8888/SeaBattle/GameService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

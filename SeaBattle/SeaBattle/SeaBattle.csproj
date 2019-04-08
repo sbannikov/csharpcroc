@@ -146,11 +146,11 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DatabaseModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Connected Services\GameClient\GameService1.wsdl" />
-    <None Include="Connected Services\GameClient\item2.xsd">
+    <None Include="Connected Services\GameClient\service.wsdl" />
+    <None Include="Connected Services\GameClient\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\GameClient\item21.xsd">
+    <None Include="Connected Services\GameClient\service1.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Database\DatabaseModel.edmx.diagram">
@@ -168,7 +168,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\GameClient\configuration91.svcinfo" />
@@ -177,7 +179,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Connected Services\GameClient\item1.disco" />
     <Content Include="Database\DatabaseModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DatabaseModel.Context.cs</LastGenOutput>
