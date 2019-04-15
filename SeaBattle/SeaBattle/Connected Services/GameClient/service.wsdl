@@ -4,6 +4,7 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/SeaBattle.Data" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IGameService_GetName_InputMessage">
@@ -12,10 +13,30 @@
   <wsdl:message name="IGameService_GetName_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetNameResponse" />
   </wsdl:message>
+  <wsdl:message name="IGameService_Fire_InputMessage">
+    <wsdl:part name="parameters" element="tns:Fire" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_Fire_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FireResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_Result_InputMessage">
+    <wsdl:part name="parameters" element="tns:Result" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_Result_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ResultResponse" />
+  </wsdl:message>
   <wsdl:portType name="IGameService">
     <wsdl:operation name="GetName">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/GetName" message="tns:IGameService_GetName_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/GetNameResponse" message="tns:IGameService_GetName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Fire">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/Fire" message="tns:IGameService_Fire_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/FireResponse" message="tns:IGameService_Fire_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Result">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/Result" message="tns:IGameService_Result_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/ResultResponse" message="tns:IGameService_Result_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IGameService" type="tns:IGameService">
@@ -29,10 +50,28 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="Fire">
+      <soap:operation soapAction="http://tempuri.org/IGameService/Fire" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Result">
+      <soap:operation soapAction="http://tempuri.org/IGameService/Result" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="GameService">
     <wsdl:port name="BasicHttpBinding_IGameService" binding="tns:BasicHttpBinding_IGameService">
-      <soap:address location="http://olimp-423-teach:8888/SeaBattle/GameService/" />
+      <soap:address location="http://localhost:8888/SeaBattle/GameService/" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

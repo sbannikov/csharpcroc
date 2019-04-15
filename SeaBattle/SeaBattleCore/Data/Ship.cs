@@ -80,5 +80,26 @@ namespace SeaBattle.Data
             }
             return true;
         }
+
+        /// <summary>
+        /// Проверка состояния клетки
+        /// </summary>
+        /// <param name="cell">Проверяемая клетка</param>
+        /// <returns>Состояние клетки корабля или None, если клетка не принадлежит кораблю</returns>
+        public State CellState(Cell cell)
+        {
+            if (Cells != null)
+            {
+                foreach (Cell c in Cells)
+                {
+                    if ((c.X == cell.X) && (c.Y == cell.Y))
+                    {
+                        return c.CellState;
+                    }
+                }
+            }
+            // Клетка не принадлежит кораблю
+            return State.None;
+        }
     }
 }

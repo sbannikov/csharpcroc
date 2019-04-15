@@ -19,5 +19,19 @@ namespace SeaBattle
         /// <returns></returns>
         [OperationContract]
         string GetName();
+
+        /// <summary>
+        /// Выстрел по заданной клетке
+        /// </summary>
+        /// <param name="cell">Клетка</param>
+        [OperationContract]
+        void Fire(Data.Cell cell);
+
+        /// <summary>
+        /// Результат выстрела по заданной клетке
+        /// </summary>
+        /// <param name="cell">Клетка</param>
+        [OperationContract]
+        void Result(Data.Cell cell);
     }
 }

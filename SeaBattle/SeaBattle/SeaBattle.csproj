@@ -146,6 +146,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DatabaseModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="Connected Services\GameClient\SeaBattle.Data.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\GameClient\service.wsdl" />
     <None Include="Connected Services\GameClient\service.xsd">
       <SubType>Designer</SubType>

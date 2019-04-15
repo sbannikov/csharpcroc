@@ -31,6 +31,11 @@ namespace SeaBattle
         private Data.Cell cell;
 
         /// <summary>
+        /// Клиент веб-сервиса моего партнера по игре
+        /// </summary>
+        private GameClient.GameServiceClient client;
+
+        /// <summary>
         /// Конструктор формы по умолчанию
         /// </summary>
         public MainForm()
@@ -50,17 +55,29 @@ namespace SeaBattle
             {
                 for (int y = 0; y < 10; y++)
                 {
-                    // Создание кнопки
-                    var b = new CellButton(x, y)
+                    // Создание кнопки моего поля
+                    var b1 = new CellButton(x, y, true )
                     {
                         Size = new Size(32, 32),
                         // Учет высоты меню и высоты панели инструментов при добавлении кнопки
                         Location = new Point(40 * x, 40 * y + menu.Height + tool.Height)
                     };
                     // Обработчик события
-                    b.Click += buttonClick;
+                    b1.Click += myButtonClick;
                     // Добавление кнопки на форму
-                    Controls.Add(b);
+                    Controls.Add(b1);
+
+                    // Создание кнопки чужого поля
+                    var b2 = new CellButton(x, y, false)
+                    {
+                        Size = new Size(32, 32),
+                        // Учет высоты меню и высоты панели инструментов при добавлении кнопки
+                        Location = new Point(40 * (x+11), 40 * y + menu.Height + tool.Height)
+                    };
+                    // Обработчик события
+                    b2.Click += enemyButtonClick;
+                    // Добавление кнопки на форму
+                    Controls.Add(b2);
                 }
             }
             // Учет высоты строки состояний
@@ -72,11 +89,29 @@ namespace SeaBattle
         }
 
         /// <summary>
+        /// Обработка нажатия кнопки на поле противника
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void enemyButtonClick(object sender, EventArgs e)
+        {
+            if (client != null)
+            {
+                // Приведение типа данных
+                CellButton b = (CellButton)sender;
+                // Создание клетки
+                var cell = new Data.Cell(b.X, b.Y);
+                // Выстрелить
+                client.Fire(cell);
+            }
+        }
+
+        /// <summary>
         /// Обработчик нажатия кнопки
         /// </summary>
         /// <param name="sender">Кнопка</param>
         /// <param name="e"></param>
-        private void buttonClick(object sender, EventArgs e)
+        private void myButtonClick(object sender, EventArgs e)
         {
             try
             {
@@ -107,6 +142,7 @@ namespace SeaBattle
                             // Запомнить первую клетку
                             b.BackColor = Color.ForestGreen;
                             cell = new Data.Cell(b.X, b.Y);
+                            cell.CellState = Data.State.Alive;
                         }
                         else if (!cell.CheckNear(b.X, b.Y))
                         {
@@ -116,7 +152,7 @@ namespace SeaBattle
                         else
                         {
                             // Покрасить первую кнопку-корабль
-                            getButton(cell.X, cell.Y).BackColor = Color.OrangeRed;
+                            getButton(cell.X, cell.Y, true).BackColor = Color.OrangeRed;
                             // Покрасить вторую кнопку-корабль
                             b.BackColor = Color.OrangeRed;
                             // Отлипнуть кнопку
@@ -194,8 +230,9 @@ namespace SeaBattle
         /// </summary>
         /// <param name="x">Абсцисса</param>
         /// <param name="y">Ордината</param>
+        /// <param name="my">Признак поля игрока</param>
         /// <returns></returns>
-        private CellButton getButton(int x, int y)
+        private CellButton getButton(int x, int y, bool my)
         {
             foreach (Control control in Controls)
             {
@@ -204,7 +241,7 @@ namespace SeaBattle
                 // Приведение типа в явной форме
                 CellButton button = (CellButton)control;
                 // Проверка на совпадение координат
-                if ((button.X == x) && (button.Y == y))
+                if ((button.X == x) && (button.Y == y) && (button.My == my))
                 {  // Мы нашли нужную кнопку
                     return button;
                 }
@@ -227,6 +264,30 @@ namespace SeaBattle
                 Program.db.Register();
                 // Отражение активности в строке состояния
                 timerLabel.Text = timerLabel.Text == "*" ? "." : "*";
+                // Проверка на очередь
+                Data.Cell cell;
+                if (Program.fire.TryDequeue(out cell))
+                {
+                    // Проверка того, куда мы попали и попали ли вообще
+                    cell.CellState = game.My.CellState(cell);
+                    // Поиск кнопки по координатам
+                    CellButton b = getButton(cell.X, cell.Y, true);
+                    // Перекрасить кнопку
+                    b.BackColor = (cell.CellState == Data.State.Alive) ? Color.DarkRed : Color.LimeGreen;
+                    // Как будто мы всегда попали
+                    if (client != null)
+                    {
+                        // Вернуть результат выстрела
+                        client.Result(cell);
+                    }
+                }
+                if (Program.result.TryDequeue(out cell))
+                {
+                    // Поиск кнопки по координатам
+                    CellButton b = getButton(cell.X, cell.Y, false);
+                    // Перекрасить кнопку
+                    b.BackColor = (cell.CellState == Data.State.Alive) ? Color.Red:  Color.Blue;
+                }
             }
             finally
             {
@@ -264,7 +325,7 @@ namespace SeaBattle
                     Database.Sessions s = (Database.Sessions)form.list.SelectedItem;
                     string uri = $"http://{s.ComputerName}:8888/SeaBattle/GameService/";
                     // Клиент сервиса
-                    var client = new GameClient.GameServiceClient();
+                    client = new GameClient.GameServiceClient();
                     client.Endpoint.Address = new System.ServiceModel.EndpointAddress(uri);
                     client.Open();
                     // Запрос имени игрока

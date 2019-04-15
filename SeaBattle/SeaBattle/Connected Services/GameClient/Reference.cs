@@ -17,6 +17,12 @@ namespace SeaBattle.GameClient {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetName", ReplyAction="http://tempuri.org/IGameService/GetNameResponse")]
         string GetName();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/Fire", ReplyAction="http://tempuri.org/IGameService/FireResponse")]
+        void Fire(SeaBattle.Data.Cell cell);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/Result", ReplyAction="http://tempuri.org/IGameService/ResultResponse")]
+        void Result(SeaBattle.Data.Cell cell);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -48,6 +54,14 @@ namespace SeaBattle.GameClient {
         
         public string GetName() {
             return base.Channel.GetName();
+        }
+        
+        public void Fire(SeaBattle.Data.Cell cell) {
+            base.Channel.Fire(cell);
+        }
+        
+        public void Result(SeaBattle.Data.Cell cell) {
+            base.Channel.Result(cell);
         }
     }
 }

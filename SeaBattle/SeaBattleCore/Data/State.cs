@@ -12,6 +12,10 @@ namespace SeaBattle.Data
     public enum State
     {
         /// <summary>
+        /// Незанятая клетка
+        /// </summary>
+        None,
+        /// <summary>
         /// Живая клетка
         /// </summary>
        Alive,

@@ -21,14 +21,21 @@ namespace SeaBattle
         public int Y;
 
         /// <summary>
+        /// Признак поля игрока
+        /// </summary>
+        public bool My;
+
+        /// <summary>
         /// Конструктор со значениями
         /// </summary>
         /// <param name="x">Абсцисса</param>
         /// <param name="y">Ордината</param>
-        public CellButton(int x, int y) 
+        /// <param name="my">Признак поля игрока</param>
+        public CellButton(int x, int y, bool my) 
         {
             X = x;
             Y = y;
+            My = my;
         }
     }
 }

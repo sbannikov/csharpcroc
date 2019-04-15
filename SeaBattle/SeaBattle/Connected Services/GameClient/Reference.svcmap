@@ -24,6 +24,7 @@
     <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="75e7660b-7359-4eab-90de-43e1e1910a99" SourceId="1" SourceUrl="http://localhost:8888/SeaBattle/GameService/mex" />
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="c322a2cb-1193-40fc-99ac-907de1b12aee" SourceId="1" SourceUrl="http://localhost:8888/SeaBattle/GameService/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="a0c43ed8-3cdf-4daf-a16d-5db9674b5cab" SourceId="1" SourceUrl="http://localhost:8888/SeaBattle/GameService/mex" />
+    <MetadataFile FileName="SeaBattle.Data.xsd" MetadataType="Schema" ID="4883d3e3-23c3-4750-9da5-2edd159d8858" SourceId="1" SourceUrl="http://localhost:8888/SeaBattle/GameService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

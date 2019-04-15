@@ -80,5 +80,22 @@ namespace SeaBattle.Data
             }
             return true;
         }
+
+        public State CellState(Cell cell)
+        {
+            if (Ships != null)
+            {
+                foreach (Ship ship in Ships)
+                {
+                    State s = ship.CellState(cell);
+                    if (s != State.None)
+                    {
+                        return s;
+                    }
+                }
+            }
+            // Клетка не принадлежит никакому кораблю
+            return State.None;
+        }
     }
 }

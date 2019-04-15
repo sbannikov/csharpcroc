@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -28,6 +29,16 @@ namespace SeaBattle
         static internal MainForm form;
 
         /// <summary>
+        /// Очередь выстрелов
+        /// </summary>
+        static internal ConcurrentQueue<Data.Cell> fire;
+
+        /// <summary>
+        /// Очередь результатов выстрелов
+        /// </summary>
+        static internal ConcurrentQueue<Data.Cell> result;
+
+        /// <summary>
         /// Точка входа в приложение
         /// </summary>
         [STAThread()]
@@ -35,6 +46,9 @@ namespace SeaBattle
         {
             try
             {
+                // Создание очередей
+                fire = new ConcurrentQueue<Data.Cell>();
+                result = new ConcurrentQueue<Data.Cell>();
                 // Создание базы данных
                 // См. также
                 // https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1063-implement-idisposable-correctly
