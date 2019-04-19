@@ -12,6 +12,10 @@ namespace AirBattle.Data
     public enum State
     {
         /// <summary>
+        /// Клетки нет (промах)
+        /// </summary>
+        None,
+        /// <summary>
         /// Живая клетка
         /// </summary>
         Active,

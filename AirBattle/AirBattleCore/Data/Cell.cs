@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using System.Drawing;
 
 namespace AirBattle.Data
 {
@@ -12,6 +13,11 @@ namespace AirBattle.Data
     /// </summary>
     public class Cell
     {
+        /// <summary>
+        /// Цвет кораблей
+        /// </summary>
+        public static readonly Color ShipColor = Color.OrangeRed;
+
         /// <summary>
         /// Абсцисса
         /// </summary>

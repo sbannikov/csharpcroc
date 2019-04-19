@@ -79,5 +79,25 @@ namespace AirBattle.Data
             }
             return true;
         }
+
+        /// <summary>
+        /// Проверка состояния клетки
+        /// </summary>
+        /// <param name="cell">Клетка</param>
+        /// <returns></returns>
+        public State CellState(Cell cell)
+        {
+            if (Cells != null)
+            {
+                foreach (Cell c in Cells)
+                {
+                    if ((c.X == cell.X) && (c.Y==cell.Y))
+                    {
+                        return c.CellState;
+                    }
+                }
+            }
+            return State.None;
+        }
     }
 }

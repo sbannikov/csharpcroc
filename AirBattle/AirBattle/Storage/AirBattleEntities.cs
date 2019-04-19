@@ -12,6 +12,16 @@ namespace AirBattle.Storage
     partial class AirBattleEntities : IDatabase
     {
         /// <summary>
+        /// Список текущих сеансов
+        /// </summary>
+        /// <returns></returns>
+        public List<Session> GetSessions()
+        {
+            // Вернуть всю таблицу
+            return Session.ToList();
+        }
+
+        /// <summary>
         /// Регистрация приложения в списке активных приложений
         /// </summary>
         public void Register()

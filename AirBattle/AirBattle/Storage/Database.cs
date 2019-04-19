@@ -39,6 +39,15 @@ namespace AirBattle.Storage
         }
 
         /// <summary>
+        /// Список текущих сеансов
+        /// </summary>
+        /// <returns></returns>
+        public List<Session> GetSessions()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Регистрация приложения в списке активных приложений
         /// </summary>
         public void Register()

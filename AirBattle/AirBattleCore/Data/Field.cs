@@ -85,5 +85,27 @@ namespace AirBattle.Data
             }
             return true;
         }
+
+        /// <summary>
+        /// Проверка состояния клетки
+        /// </summary>
+        /// <param name="cell">Клетка</param>
+        /// <returns></returns>
+        public State CellState(Cell cell)
+        {
+            if (Ships != null)
+            {
+                foreach (Ship ship in Ships)
+                {
+                    State s = ship.CellState(cell);
+                    if (s != State.None)
+                    {
+                        return s;
+                    }
+                }
+            }
+            // Промах
+            return State.None;
+        }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -20,6 +20,16 @@ namespace AirBattle
         static internal Storage.IDatabase db;
 
         /// <summary>
+        /// Очередь для выстрелов
+        /// </summary>
+        static internal ConcurrentQueue<Data.Cell> fire;
+
+        /// <summary>
+        /// Очередь для результатов выстрелов
+        /// </summary>
+        static internal ConcurrentQueue<Data.Cell> result;
+
+        /// <summary>
         /// Точка входа в приложение
         /// </summary>        
         [STAThread()]
@@ -27,10 +37,13 @@ namespace AirBattle
         {
             try
             {
+                // Создание очередей для межпоточного взаимодействия
+                fire = new ConcurrentQueue<Data.Cell>();
+                result = new ConcurrentQueue<Data.Cell>();
                 // База данных ADO.NET или Entity Framework
                 // см. также 
                 // https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1063-implement-idisposable-correctly
-                using ((IDisposable)(db = new Storage.Database()))
+                using ((IDisposable)(db = new Storage.AirBattleEntities()))
                 {
                     // Регистрация клиента в базе данных
                     db.Register();
@@ -40,7 +53,14 @@ namespace AirBattle
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Воздушный бой", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                string m = ex.Message;
+                while (ex.InnerException != null)
+                {
+                    ex = ex.InnerException;
+                    m += Environment.NewLine;
+                    m += ex.Message;
+                }
+                MessageBox.Show(m, "Воздушный бой", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
     }

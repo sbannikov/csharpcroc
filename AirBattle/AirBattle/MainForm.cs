@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.ServiceModel;
 
 namespace AirBattle
 {
@@ -31,6 +32,18 @@ namespace AirBattle
         /// Состояние игры
         /// </summary>
         private Data.Game game;
+        /// <summary>
+        /// Сервис
+        /// </summary>
+        private GameService svc;
+        /// <summary>
+        /// Домик для сервиса
+        /// </summary>
+        private ServiceHost host;
+        /// <summary>
+        /// Клиент веб-сервиса
+        /// </summary>
+        private GameClient.GameServiceClient client;
 
         /// <summary>
         /// Конструктор по умолчанию
@@ -81,9 +94,9 @@ namespace AirBattle
             {
                 for (int y = 1; y <= Data.Game.FieldSize; y++)
                 {
-                    // Создание новой кнопки
+                    // Создание новой кнопки своего поля
                     // Использование инициализатора
-                    CellButton b = new CellButton(x, y)
+                    CellButton b1 = new CellButton(x, y, true)
                     {
                         // Размер кнопки
                         Size = new Size(buttonSize, buttonSize),
@@ -91,9 +104,22 @@ namespace AirBattle
                         Location = new Point(buttonSize * x, buttonSize * y + menu.Height + tool.Height)
                     };
                     // Добавление обработчика кнопки
-                    b.Click += Button_Click;
+                    b1.Click += Button_Click;
                     // Добавление кнопки на форму
-                    Controls.Add(b);
+                    Controls.Add(b1);
+
+                    // Создание новой кнопки чужого поля
+                    // Использование инициализатора
+                    CellButton b2 = new CellButton(x, y, false)
+                    {
+                        // Размер кнопки
+                        Size = new Size(buttonSize, buttonSize),
+                        // Положение кнопки
+                        Location = new Point(buttonSize * (x + 11), buttonSize * y + menu.Height + tool.Height)
+                    };
+                    b2.Click += Fire_Click;
+                    // Добавление кнопки на форму
+                    Controls.Add(b2);
                 }
             }
             // Формирование подписей
@@ -101,8 +127,10 @@ namespace AirBattle
             {
                 // Буквенная подпись по горизонтали
                 AddLabel(a, 0, Convert.ToChar(a + Convert.ToInt16('А') - 1).ToString());
+                AddLabel(a + 11, 0, Convert.ToChar(a + Convert.ToInt16('А') - 1).ToString());
                 // Цифровая подпись по вертикали
                 AddLabel(0, a, (a - 1).ToString());
+                AddLabel(11, a, (a - 1).ToString());
             }
             // Коррекция высоты формы
             Height += status.Height;
@@ -110,10 +138,39 @@ namespace AirBattle
             timer.Interval = Properties.Settings.Default.Interval;
             // Включение таймера
             timer.Enabled = true;
+            // Запуск в отдельном потоке
+            Task.Factory.StartNew(() =>
+            {
+                // Создание сервиса
+                svc = new GameService();
+                // Создание домика для сервиса
+                host = new ServiceHost(svc);
+                // Включение сервиса
+                host.Open();
+            });
         }
 
         /// <summary>
-        /// Обработчик нажатия на кнопку
+        /// Нажатие на кнопку вражеского поля
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Fire_Click(object sender, EventArgs e)
+        {
+            // Проверка на существование клиента
+            if (client != null)
+            {
+                // Приведение типа
+                CellButton b = (CellButton)sender;
+                // Создание объекта клетки
+                Data.Cell cell = new Data.Cell(b.X, b.Y);
+                // Выстрел по вражескому полю
+                client.Fire(cell);
+            }
+        }
+
+        /// <summary>
+        /// Обработчик нажатия на кнопку моего поля
         /// </summary>
         /// <param name="sender">Кнопка</param>
         /// <param name="e"></param>
@@ -132,7 +189,7 @@ namespace AirBattle
                         // Добавление корабля
                         game.My.AddShip1(b.X, b.Y);
                         // Перекрасить кнопку
-                        b.BackColor = Color.OrangeRed;
+                        b.BackColor = Data.Cell.ShipColor;
                         // Отпустить кнопку 
                         button1.Checked = false;
                         // Корабль создан
@@ -145,7 +202,10 @@ namespace AirBattle
                             // Покрасить первую кнопку
                             b.BackColor = Color.Orchid;
                             // Запомнить первую клетку
-                            cell = new Data.Cell(b.X, b.Y);
+                            cell = new Data.Cell(b.X, b.Y)
+                            {
+                                CellState = Data.State.Active
+                            };
                         }
                         else if (!cell.CheckCellNear(b.X, b.Y))
                         {
@@ -154,9 +214,9 @@ namespace AirBattle
                         else
                         {
                             // Покрасить первую кнопку
-                            getButton(cell.X, cell.Y).BackColor= Color.OrangeRed;
+                            getButton(cell.X, cell.Y, true).BackColor = Data.Cell.ShipColor;
                             // Покрасить вторую кнопку
-                            b.BackColor = Color.OrangeRed;
+                            b.BackColor = Data.Cell.ShipColor;
                             // Добавить корабль
                             game.My.AddShip2(cell, b.X, b.Y);
                             // Кнопка "отлипла"
@@ -167,7 +227,7 @@ namespace AirBattle
                             ship = 0;
                         }
                         break;
-                }               
+                }
             }
             catch (Exception ex)
             {
@@ -237,6 +297,14 @@ namespace AirBattle
                 if (open.ShowDialog() == DialogResult.OK)
                 {
                     game = Data.Game.Load(open.FileName);
+                    // Визуализация данных игры
+                    foreach (Data.Ship ship in game.My.Ships)
+                    {
+                        foreach (Data.Cell cell in ship.Cells)
+                        {
+                            getButton(cell.X, cell.Y, true).BackColor = Data.Cell.ShipColor;
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -256,8 +324,29 @@ namespace AirBattle
             Program.db.Register();
             // Индикация активности
             timerLabel.Text = (timerLabel.Text == "*") ? "." : "*";
-        }
 
+            Data.Cell cell;
+            // Проверка на наличие выстрела
+            if (Program.fire.TryDequeue(out cell))
+            {
+                // Определение кнопки
+                CellButton b = getButton(cell.X, cell.Y, true);
+                // Определение результата выстрела
+                cell.CellState = game.My.CellState(cell);
+                // Отобразить состояние клетки
+                b.BackColor = cell.CellState == Data.State.None? Color.Blue : Color.IndianRed;
+                // Возврат результата
+                client.Result(cell);
+            }
+            // Проверка на наличие результата
+            if (Program.result.TryDequeue(out cell))
+            {
+                // Отобразить состояние клетки
+                CellButton b = getButton(cell.X, cell.Y, false);
+                // Отобразить состояние клетки
+                b.BackColor = cell.CellState == Data.State.None ? Color.Blue : Color.IndianRed;
+            }
+        }
         /// <summary>
         /// Событие попытки закрытия формы
         /// </summary>
@@ -273,9 +362,10 @@ namespace AirBattle
         /// </summary>
         /// <param name="x">Абсцисса</param>
         /// <param name="y">Ордината</param>
+        /// <param name="my">Признак собственного поля</param>
         /// <returns></returns>
-        private CellButton getButton(int x, int y)
-        {
+        private CellButton getButton(int x, int y, bool my)
+        {            
             foreach (Control control in Controls)
             {
                 // Проверка на соответствие типа
@@ -283,7 +373,7 @@ namespace AirBattle
                 // Приведение типа в явной форме
                 CellButton button = (CellButton)control;
                 // Проверка на совпадение координат
-                if ((button.X == x) && (button.Y == y))
+                if ((button.X == x) && (button.Y == y) && (button.My == my))
                 {
                     // Мы нашли нужную кнопку
                     return button;
@@ -291,6 +381,32 @@ namespace AirBattle
             }
             // Кнопка не найдена
             return null;
+        }
+
+        /// <summary>
+        /// Обработчик пункта меню "Игра | Начать"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void startToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Создание формы
+            var form = new ChoosePlayerForm();
+            // Отображение модального окна
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                Storage.Session s = (Storage.Session)form.list.SelectedItem;
+                // Ссылка на веб-сервис игры
+                string uri = $"http://localhost:8888/AirBattle/GameService/";
+                // Клиент сервиса
+                client = new GameClient.GameServiceClient();
+                client.Endpoint.Address = new EndpointAddress(uri);
+                client.Open();
+                // Запрос имени игрока
+                string name = client.GetName();
+                // Вывод на экран
+                MessageBox.Show(name);
+            }
         }
     }
 }

@@ -27,6 +27,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -67,6 +68,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -81,6 +83,19 @@
     <Compile Include="CellButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ChoosePlayerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChoosePlayerForm.Designer.cs">
+      <DependentUpon>ChoosePlayerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\GameClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="GameService.cs" />
+    <Compile Include="IGameService.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,6 +125,10 @@
     <Compile Include="Storage\Session.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Storage\SessionEntity.cs" />
+    <EmbeddedResource Include="ChoosePlayerForm.resx">
+      <DependentUpon>ChoosePlayerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -123,6 +142,16 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Connected Services\GameClient\GameService.wsdl" />
+    <None Include="Connected Services\GameClient\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GameClient\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GameClient\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -145,6 +174,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Connected Services\GameClient\item.disco" />
+    <None Include="Connected Services\GameClient\configuration91.svcinfo" />
+    <None Include="Connected Services\GameClient\configuration.svcinfo" />
+    <None Include="Connected Services\GameClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Pictures\01.png" />
     <Content Include="Pictures\02.png" />
     <Content Include="Pictures\03.png" />
@@ -182,6 +218,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\GameClient\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
