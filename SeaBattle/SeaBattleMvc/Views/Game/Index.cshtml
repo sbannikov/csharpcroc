@@ -1,0 +1,32 @@
+﻿@model  SeaBattleMvc.Models.MvcField
+
+@{
+    ViewBag.Title = "Игровое поле";
+}
+
+<h2>Игровое поле</h2>
+
+<table>
+    @for (int x = 0; x < 10; x++)
+    {
+        <tr>
+            @for (int y = 0; y < 10; y++)
+            {
+            <td>
+                @if (Model.cell[x, y].State == SeaBattle.Data.State.Hit)
+                {
+                    @Html.ActionLink("*", "Fire", new { cx = x, cy = y }, new { @class = "btn btn-danger" })
+                }
+                else if (Model.cell[x, y].State == SeaBattle.Data.State.Alive)
+                {
+                    @Html.ActionLink("*", "Fire", new { cx = x, cy = y }, new { @class = "btn btn-success" })
+                }
+                else
+                {
+                    @Html.ActionLink("*", "Fire", new { cx = x, cy = y }, new { @class = "btn btn-info" })
+                }
+            </td>
+            }
+        </tr>
+    }
+</table>

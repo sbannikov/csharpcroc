@@ -14,7 +14,10 @@ namespace SeaBattle.Database
         public void Register()
         {
             // Имя компьютера
-            string name = System.Environment.MachineName;
+            // System.Environment.MachineName - возвращает NETBIOS-имя, ограничение 15 символов
+            // Будем использовать доменное имя
+            string name = System.Net.Dns.GetHostName();
+
             // Текущая метка времени
             DateTime now = DateTime.Now;
             // Проверка на существование записи
