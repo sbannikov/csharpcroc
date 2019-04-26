@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirBattleCore", "AirBattleC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirBattleWeb", "AirBattleWeb\AirBattleWeb.csproj", "{8E7E1D8D-8578-42A6-A0D9-DD63793E7622}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirBattleService", "AirBattleService\AirBattleService.csproj", "{2D6653A7-EE9A-48D8-88C4-EAD29679B6AC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{8E7E1D8D-8578-42A6-A0D9-DD63793E7622}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E7E1D8D-8578-42A6-A0D9-DD63793E7622}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E7E1D8D-8578-42A6-A0D9-DD63793E7622}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D6653A7-EE9A-48D8-88C4-EAD29679B6AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D6653A7-EE9A-48D8-88C4-EAD29679B6AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D6653A7-EE9A-48D8-88C4-EAD29679B6AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D6653A7-EE9A-48D8-88C4-EAD29679B6AC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
