@@ -1,0 +1,64 @@
+﻿@model SeaBattle.CoreTestData
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>CoreTestData</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.X1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.X1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Y1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Y1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.X2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.X2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Y2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Y2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Result)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Result)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
