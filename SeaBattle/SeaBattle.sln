@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeaBattleMvc", "SeaBattleMv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeaBattleTest", "SeaBattleTest\SeaBattleTest.csproj", "{0CF5AC7C-CDC2-4D1B-B623-3B1FF29943A6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeaBattleService", "SeaBattleService\SeaBattleService.csproj", "{86113277-2C99-4707-B129-F72BDAFA8C44}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{0CF5AC7C-CDC2-4D1B-B623-3B1FF29943A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CF5AC7C-CDC2-4D1B-B623-3B1FF29943A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CF5AC7C-CDC2-4D1B-B623-3B1FF29943A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86113277-2C99-4707-B129-F72BDAFA8C44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86113277-2C99-4707-B129-F72BDAFA8C44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86113277-2C99-4707-B129-F72BDAFA8C44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86113277-2C99-4707-B129-F72BDAFA8C44}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
