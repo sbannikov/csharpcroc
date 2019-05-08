@@ -7,6 +7,10 @@ AcronymForm
 - для загрузки используется XML-десериализация (System.Xml.Serialization)
 - осуществляется копирование полученного списка в буфер обмена Windows в формате CSV для вставки в Microsoft Excel 
 
+BgWorker
+* Microsoft.NET Framework, Windows Forms
+- демонстрация использования класса BackgroundWorker для многопоточных вычислений
+
 Calculator
 * Microsoft.NET Framework, Windows Forms
 - проект простого калькулятора, поддерживающего различные системы счисления (для целых чисел)
