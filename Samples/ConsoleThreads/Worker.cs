@@ -66,7 +66,7 @@ namespace ConsoleThreads
             // Случайное число от 2 до 3
             b = 2 + r.NextDouble();
             // Количество итераций 50m - 500m
-            N = r.Next(5000000, 50000000);
+            N = r.Next(15000000, 150000000);
             // Поток
             thread = new Thread(Work);
             // Увеличение счетчика
@@ -98,38 +98,52 @@ namespace ConsoleThreads
         /// </summary>
         private void Work()
         {
-            // Ожидание общей разблокировки
-            // Если удалить эту строку, то не будет реализован
-            // синхронный запуск всех потоков одновременно
-            // (такое же изменение надо сделать в методе Main)
-            lock (locker)
+            try
             {
-            }
-
-            start = DateTime.Now;
-            R = 0; // результат
-            double delta = (b - a) / N;
-            long n = N / 100; // Количество итераций на 1%          
-            int percent = 0;
-
-            // Цикл интегрирования
-            for (double x = a; x < b; x += delta)
-            {
-                // Интегрирование
-                R += f(x) * delta;
-                int currentPercent = (int)Math.Round((x - a) / (b - a) * 100, 0);
-                // Определение хода выполнения
-               if (currentPercent != percent)
+                // Ожидание общей разблокировки
+                // Если удалить эту строку, то не будет реализован
+                // синхронный запуск всех потоков одновременно
+                // (такое же изменение надо сделать в методе Main)
+                lock (locker)
                 {
-                    // Примечание
-                    // Если удалить следующую строку, то правильность вывода информации на экран нарушится
-                    lock (locker)
+                }
+
+                start = DateTime.Now;
+                R = 0; // результат
+                double delta = (b - a) / N;
+                long n = N / 100; // Количество итераций на 1%          
+                int percent = 0;
+
+                // Цикл интегрирования
+                for (double x = a; x < b; x += delta)
+                {
+                    // Интегрирование
+                    R += f(x) * delta;
+                    int currentPercent = (int)Math.Round((x - a) / (b - a) * 100, 0);
+                    // Определение хода выполнения
+                    if (currentPercent != percent)
                     {
-                        Console.SetCursorPosition(myNumber * 8, 0);
-                        Console.Write(currentPercent + "%");
+                        // Примечание
+                        // Если удалить следующую строку, то правильность вывода информации на экран нарушится
+                        lock (locker)
+                        {
+                            if (Console.WindowWidth > myNumber * 8)
+                            {
+                                Console.SetCursorPosition(myNumber * 8, 0);
+                                Console.Write(currentPercent + "%");
+                            }
+                        }
+                        // Сбросить счетчик
+                        percent = currentPercent;
                     }
-                    // Сбросить счетчик
-                    percent = currentPercent;
+                }
+            }
+            catch (ThreadAbortException)
+            {
+                lock (locker)
+                {
+                    Console.SetCursorPosition(myNumber * 8, 0);
+                    Console.Write("***%");
                 }
             }
         }

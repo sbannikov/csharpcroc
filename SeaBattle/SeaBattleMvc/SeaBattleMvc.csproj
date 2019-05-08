@@ -47,6 +47,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.DependencyCollector, Version=2.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.1\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
     </Reference>
@@ -145,6 +151,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CoreTestDataController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -232,6 +239,11 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Game\Index.cshtml" />
+    <Content Include="Views\CoreTestData\Create.cshtml" />
+    <Content Include="Views\CoreTestData\Delete.cshtml" />
+    <Content Include="Views\CoreTestData\Details.cshtml" />
+    <Content Include="Views\CoreTestData\Edit.cshtml" />
+    <Content Include="Views\CoreTestData\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -251,6 +263,10 @@
     <ProjectReference Include="..\SeaBattleCore\SeaBattleCore.csproj">
       <Project>{f5ae9bd8-fd01-497b-af36-b24e96ed78c6}</Project>
       <Name>SeaBattleCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SeaBattleTest\SeaBattleTest.csproj">
+      <Project>{0cf5ac7c-cdc2-4d1b-b623-3b1ff29943a6}</Project>
+      <Name>SeaBattleTest</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

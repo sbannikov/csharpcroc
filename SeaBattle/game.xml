@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Game xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://vk.com/csharpcroc">
+  <MyField>
+    <Ships>
+      <Ship>
+        <Cells>
+          <Cell x="1" y="1" state="Alive" />
+        </Cells>
+      </Ship>
+      <Ship>
+        <Cells>
+          <Cell x="8" y="1" state="Alive" />
+        </Cells>
+      </Ship>
+      <Ship>
+        <Cells>
+          <Cell x="1" y="8" state="Alive" />
+        </Cells>
+      </Ship>
+      <Ship>
+        <Cells>
+          <Cell x="8" y="8" state="Alive" />
+        </Cells>
+      </Ship>
+      <Ship>
+        <Cells>
+          <Cell x="3" y="2" state="Alive" />
+          <Cell x="4" y="2" state="Alive" />
+        </Cells>
+      </Ship>
+      <Ship>
+        <Cells>
+          <Cell x="7" y="3" state="Alive" />
+          <Cell x="7" y="4" state="Alive" />
+        </Cells>
+      </Ship>
+      <Ship>
+        <Cells>
+          <Cell x="2" y="6" state="Alive" />
+          <Cell x="2" y="5" state="Alive" />
+        </Cells>
+      </Ship>
+    </Ships>
+  </MyField>
+  <EnemyField />
+</Game>
