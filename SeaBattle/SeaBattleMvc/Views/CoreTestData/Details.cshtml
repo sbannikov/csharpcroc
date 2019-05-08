@@ -1,0 +1,58 @@
+﻿@model SeaBattle.CoreTestData
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CoreTestData</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.X1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.X1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Y1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Y1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.X2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.X2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Y2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Y2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Result)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Result)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

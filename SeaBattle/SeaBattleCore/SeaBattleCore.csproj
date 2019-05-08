@@ -34,7 +34,14 @@
     <ApplicationIcon>iconfinder_Citycons_ship_1342928.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -44,15 +51,39 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CoreData.cs" />
+    <Compile Include="CoreTestData.cs" />
     <Compile Include="Data\Cell.cs" />
     <Compile Include="Data\Field.cs" />
     <Compile Include="Data\Game.cs" />
     <Compile Include="Data\Ship.cs" />
     <Compile Include="Data\State.cs" />
+    <Compile Include="DB.cs" />
+    <Compile Include="Migrations\201904291624539_000.cs" />
+    <Compile Include="Migrations\201904291624539_000.Designer.cs">
+      <DependentUpon>201904291624539_000.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904291649463_001.cs" />
+    <Compile Include="Migrations\201904291649463_001.Designer.cs">
+      <DependentUpon>201904291649463_001.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="iconfinder_Citycons_ship_1342928.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201904291624539_000.resx">
+      <DependentUpon>201904291624539_000.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904291649463_001.resx">
+      <DependentUpon>201904291649463_001.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

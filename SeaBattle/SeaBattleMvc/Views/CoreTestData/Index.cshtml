@@ -1,0 +1,57 @@
+﻿@model IEnumerable<SeaBattle.CoreTestData>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create",null,new { @class = "btn btn-success" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.X1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Y1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.X2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Y2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Result)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.X1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Y1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.X2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Y2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Result)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
