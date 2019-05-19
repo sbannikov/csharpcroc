@@ -12,7 +12,17 @@ namespace BGworker
 {
     public partial class MainForm : Form
     {
+        /// <summary>
+        /// Количество потоков
+        /// </summary>
+        private const int count = 3;
+
         private Color back;
+
+        /// <summary>
+        /// Список потоков
+        /// </summary>
+        private List<BackgroundWorker> workers = new List<BackgroundWorker>();
 
         /// <summary>
         /// Конструктор формы
@@ -22,6 +32,19 @@ namespace BGworker
             InitializeComponent();
             // Запомнить фон
             back = buttonGo.BackColor;
+            // Создание объектов для потоков
+            for (int i = 0; i < count; i++)
+            {
+                var bg = new BackgroundWorker()
+                {
+                    WorkerReportsProgress = true,
+                    WorkerSupportsCancellation = true
+                };
+                bg.DoWork += worker_DoWork;
+                bg.ProgressChanged += worker_ProgressChanged;
+                bg.RunWorkerCompleted += worker_RunWorkerCompleted;
+                workers.Add(bg);
+            }
         }
 
         /// <summary>
@@ -45,8 +68,7 @@ namespace BGworker
         {
             double R = 0; // результат
             double delta = (b - a) / N;
-            long n = N / 100; // Количество итераций на 1%
-            long i = 0;
+            long n = N / 100; // Количество итераций на 1%          
             int percent = 0;
 
             // Цикл интегрирования
@@ -79,17 +101,21 @@ namespace BGworker
         /// <param name="e"></param>
         private void buttonGo_Click(object sender, EventArgs e)
         {
-            if (worker1.IsBusy)
+            try
             {
-                MessageBox.Show("Занято!!!!!");
-            }
-            else
-            {
-                // Запуск фонового потока
-                worker1.RunWorkerAsync();
-                worker2.RunWorkerAsync();
+
+                // Запуск фоновых потоков
+                foreach (var bg in workers)
+                {
+                    bg.RunWorkerAsync(textN.Text);
+                }
+                // Integrator(0, Math.PI / 2, 1000000000, worker1);
                 // немного дизайна
                 buttonGo.BackColor = Color.LightCoral;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message} Занято!!!!!");
             }
         }
 
@@ -100,7 +126,7 @@ namespace BGworker
         /// <param name="e"></param>
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            long N = long.Parse(textN.Text);
+            long N = long.Parse((string)e.Argument);
             e.Result = Integrator(0, Math.PI / 2, N, (BackgroundWorker)sender).ToString();
         }
 
@@ -111,14 +137,7 @@ namespace BGworker
         /// <param name="e"></param>
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (sender == worker1)
-            {
-                textResult1.Text = (string)e.Result;
-            }
-            else
-            {
-                textResult2.Text = (string)e.Result;
-            }
+            list.Items.Add((string)e.Result);
             // отметить завершение в интерфейсе
             buttonGo.BackColor = back;
             progress.Value = 0;
@@ -142,7 +161,10 @@ namespace BGworker
         private void buttonStop_Click(object sender, EventArgs e)
         {
             // Останов
-            worker1.CancelAsync();
+            foreach (var bg in workers)
+            {
+                bg.CancelAsync();
+            }
         }
     }
 }
