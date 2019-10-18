@@ -1,5 +1,7 @@
 Перечень проектов
 -----------------
+Целевая платформа: Microsoft.NET Framework 4.7.2
+
 AcronymForm
 * Microsoft.NET Framework, Windows Forms
 - поиск сокращений в текстовом файле, построение списка использованных сокращений
