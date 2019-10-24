@@ -34,48 +34,57 @@ namespace Sinusoid
             // MessageBox.Show("Привет!");
             try
             {
+                // Очистка прошлых ошибок
+                errors.Clear();
+                bool ok = true;
                 // Получение пределов
                 double min;
                 if (!double.TryParse(textMininum.Text, out min))
                 {
-                    MessageBox.Show("Минимум задан некорректно", "Ошибка",
-                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
+                    errors.SetError(textMininum, "Минимум задан некорректно");
+                    errors.SetIconAlignment(textMininum, ErrorIconAlignment.MiddleLeft);
+                    ok = false;
                 }
 
                 double max;
                 if (!double.TryParse(textMaximum.Text, out max))
                 {
-                    MessageBox.Show("Максимум задан некорректно", "Ошибка",
-                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
+                    errors.SetError(textMaximum, "Максимум задан некорректно");
+                    errors.SetIconAlignment(textMaximum, ErrorIconAlignment.MiddleLeft);
+                    ok = false;
                 }
 
-                if (min >= max)
+                if (ok && (min >= max))
                 {
-                    MessageBox.Show("Максимум меньше минимума", "Ошибка",
-                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
+                    errors.SetError(textMininum, "Минимум больше максимума");
+                    errors.SetIconAlignment(textMininum, ErrorIconAlignment.MiddleLeft);
+                    errors.SetError(textMaximum, "Максимум меньше минимума");
+                    errors.SetIconAlignment(textMaximum, ErrorIconAlignment.MiddleLeft);
+                    ok = false;
                 }
 
-                // Пределы по оси абсцисс
-                chart.ChartAreas[0].AxisX.Minimum = min;
-                chart.ChartAreas[0].AxisX.Maximum = max;
-
-                // Создание графика заново
-                chart.Series.Clear();
-                Series series = chart.Series.Add("sin");
-                series.ChartType = SeriesChartType.Spline;
-                series.Color = Color.Coral;
-
-                double delta = (max - min) / 100;
-                double x = min;
-
-                for (int i = 0; i <= 100; i++)
+                if (ok)
                 {
-                    double y = Math.Sin(x);
-                    series.Points.AddXY(x, y);
-                    x += delta;
+
+                    // Пределы по оси абсцисс
+                    chart.ChartAreas[0].AxisX.Minimum = min;
+                    chart.ChartAreas[0].AxisX.Maximum = max;
+
+                    // Создание графика заново
+                    chart.Series.Clear();
+                    Series series = chart.Series.Add("sin");
+                    series.ChartType = SeriesChartType.Spline;
+                    series.Color = Color.Coral;
+
+                    double delta = (max - min) / 100;
+                    double x = min;
+
+                    for (int i = 0; i <= 100; i++)
+                    {
+                        double y = Math.Sin(x);
+                        series.Points.AddXY(x, y);
+                        x += delta;
+                    }
                 }
             }
             catch (Exception ex)
@@ -83,6 +92,58 @@ namespace Sinusoid
                 MessageBox.Show(ex.Message, "Ошибка", 
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+        }
+
+        /// <summary>
+        /// Минимум теряет фокус
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textMininum_Leave(object sender, EventArgs e)
+        {
+            double min;
+            if (!double.TryParse(textMininum.Text, out min))
+            {
+                errors.SetError(textMininum, "Минимум задан некорректно");
+                errors.SetIconAlignment(textMininum, ErrorIconAlignment.MiddleLeft);
+            }
+            else
+            {
+                errors.SetError(textMininum, null);
+            }
+        }
+
+        /// <summary>
+        /// Мышь вошла
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button_MouseEnter(object sender, EventArgs e)
+        {
+            Button b = (Button)sender;
+            b.BackColor = Color.CornflowerBlue;
+        }
+
+        /// <summary>
+        /// Мышь ушла
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button_MouseLeave(object sender, EventArgs e)
+        {
+            Button b = (Button)sender;
+            b.BackColor = Color.LightGray;
+        }
+
+        /// <summary>
+        /// Мышь сидит на кнопке
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button_MouseHover(object sender, EventArgs e)
+        {
+            Button b = (Button)sender;
+            b.BackColor = Color.ForestGreen;
         }
     }
 }

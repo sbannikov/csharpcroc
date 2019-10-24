@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
@@ -37,7 +38,9 @@
             this.textMaximum = new System.Windows.Forms.TextBox();
             this.button = new System.Windows.Forms.Button();
             this.chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.errors = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errors)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -66,6 +69,7 @@
             this.textMininum.Name = "textMininum";
             this.textMininum.Size = new System.Drawing.Size(161, 20);
             this.textMininum.TabIndex = 0;
+            this.textMininum.Leave += new System.EventHandler(this.textMininum_Leave);
             // 
             // textMaximum
             // 
@@ -87,6 +91,9 @@
             this.button.Text = "Построить график";
             this.button.UseVisualStyleBackColor = true;
             this.button.Click += new System.EventHandler(this.button_Click);
+            this.button.MouseEnter += new System.EventHandler(this.button_MouseEnter);
+            this.button.MouseLeave += new System.EventHandler(this.button_MouseLeave);
+            this.button.MouseHover += new System.EventHandler(this.button_MouseHover);
             // 
             // chart
             // 
@@ -102,6 +109,11 @@
             this.chart.Size = new System.Drawing.Size(310, 112);
             this.chart.TabIndex = 5;
             this.chart.Text = "chart1";
+            // 
+            // errors
+            // 
+            this.errors.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errors.ContainerControl = this;
             // 
             // MainForm
             // 
@@ -119,6 +131,7 @@
             this.Name = "MainForm";
             this.Text = "Первое приложение";
             ((System.ComponentModel.ISupportInitialize)(this.chart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errors)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -132,6 +145,7 @@
         private System.Windows.Forms.TextBox textMaximum;
         private System.Windows.Forms.Button button;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart;
+        private System.Windows.Forms.ErrorProvider errors;
     }
 }
 
