@@ -37,5 +37,19 @@ namespace WordGame.Storage
         /// </summary>
         [XmlText()]
         public string Description;
+
+        /// <summary>
+        /// Конструктор по умолчанию
+        /// </summary>
+        public Word() { }
+
+        /// <summary>
+        /// Конструктор по слову
+        /// </summary>
+        /// <param name="w">Слово</param>
+        public Word(string w) 
+        {
+            Name = w;
+        }
     }
 }

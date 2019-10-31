@@ -31,5 +31,9 @@ namespace WordGame
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel panel;
+
+        protected global::System.Web.UI.WebControls.ListBox words;
+
+        protected global::System.Web.UI.WebControls.Label error;
     }
 }
