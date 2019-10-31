@@ -9,7 +9,15 @@ namespace WordGame
 {
     public partial class Game : System.Web.UI.Page
     {
+        /// <summary>
+        /// Воблебное слово
+        /// </summary>
         private const string Word = "СИНХРОНИЗАЦИЯ";
+
+        /// <summary>
+        /// Словарь
+        /// </summary>
+        private Storage.WordList list;
 
         /// <summary>
         /// Счетчик нажатия на клавиши
@@ -49,6 +57,11 @@ namespace WordGame
             }
         }
 
+        /// <summary>
+        /// Загрузка страницы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
             int n = 0;
@@ -74,6 +87,9 @@ namespace WordGame
                 };
                 panel.Controls.Add(literal);
             }
+
+            // Загрузка словаря
+            list = Storage.WordList.Load("http://www.orioner.ru/croc/WordList.xml");
         }
 
         /// <summary>
