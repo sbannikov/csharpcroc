@@ -9,7 +9,15 @@ namespace WordGame
 {
     public partial class Game : System.Web.UI.Page
     {
+        /// <summary>
+        /// Воблебное слово
+        /// </summary>
         private const string Word = "СИНХРОНИЗАЦИЯ";
+
+        /// <summary>
+        /// Словарь
+        /// </summary>
+        private Storage.WordList list;
 
         /// <summary>
         /// Счетчик нажатия на клавиши
@@ -49,6 +57,11 @@ namespace WordGame
             }
         }
 
+        /// <summary>
+        /// Загрузка страницы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
             int n = 0;
@@ -74,6 +87,9 @@ namespace WordGame
                 };
                 panel.Controls.Add(literal);
             }
+
+            // Загрузка словаря
+            list = Storage.WordList.Load("http://www.orioner.ru/croc/WordList.xml");
         }
 
         /// <summary>
@@ -92,7 +108,25 @@ namespace WordGame
             int n = int.Parse(button.ID);
             stack.Push(n);
 
+            // Счётчик нажатий на кнопки 
             PressCount++;
+
+            // Проверка слова по словарю
+            Storage.Word w = new Storage.Word(word.Text);
+            // Проверка на слово в словаре
+            if (list.Words.Contains(w, list))
+            {
+                ListItem item = new ListItem(word.Text);
+                // Поискать слово в списке на экране
+                if (!words.Items.Contains(item))
+                {
+                    // Добавить в список
+                    // [!] дописать сортировку когда будет время
+                    words.Items.Add(word.Text);
+                    // Сбросить слово
+                    clear_Click(null, null);
+                }
+            }
         }
 
         /// <summary>
@@ -150,6 +184,23 @@ namespace WordGame
                 }
             }
             PressCount++;
+        }
+
+        /// <summary>
+        /// Добавление слова в словарь
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void enter_Click(object sender, EventArgs e)
+        {
+            // Перегнать массив в список
+            List<Storage.Word> l = list.Words.ToList();
+            // Добавление слова
+            l.Add(new Storage.Word(word.Text));
+            // Перегнать список в массив
+            list.Words = l.ToArray();
+            // Сохранить в файл
+            list.Save(@"C:\TEST.XML");
         }
     }
 }
