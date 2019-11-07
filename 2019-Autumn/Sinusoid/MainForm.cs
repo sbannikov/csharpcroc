@@ -89,7 +89,7 @@ namespace Sinusoid
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", 
+                MessageBox.Show(ex.Message, "Ошибка",
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
@@ -144,6 +144,83 @@ namespace Sinusoid
         {
             Button b = (Button)sender;
             b.BackColor = Color.ForestGreen;
+        }
+
+        /// <summary>
+        /// Асинхронное действие (в отдельном потоке)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Parameters p = (Parameters)e.Argument;
+
+            int percent = -1;
+
+            for (long i = p.Minimum; i < p.Maximum; i++)
+            {
+                // Пауза процесса на 10 мс
+                System.Threading.Thread.Sleep(10);
+                // Проверка на досрочное завершение
+                if (worker.CancellationPending)
+                {
+                    return;
+                }
+                // Расчет % выполнения задания
+                int newPercent = (int)(100.0 *
+                    (i - p.Minimum) /
+                    (p.Maximum - p.Minimum));
+                // Изменился ли % с прошлого раза
+                if (newPercent != percent)
+                {
+                    percent = newPercent;
+                    // Отображение процесса
+                    worker.ReportProgress(percent);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Запуск процесса в отдельном потоке
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void startButton_Click(object sender, EventArgs e)
+        {
+            worker.RunWorkerAsync(new Parameters(textMininum.Text, textMaximum.Text));
+        }
+
+        /// <summary>
+        /// Отображение процесса
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progress.Value = e.ProgressPercentage;
+        }
+
+        /// <summary>
+        /// Запрос досрочного завершения
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void stopButton_Click(object sender, EventArgs e)
+        {
+            worker.CancelAsync();
+        }
+
+        /// <summary>
+        /// Завершение процесса
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            // Обнулить % прогресса
+            progress.Value = 0;
+            // Отображение графика
+            button_Click(null, null);
         }
     }
 }

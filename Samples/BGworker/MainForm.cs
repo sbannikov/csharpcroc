@@ -76,17 +76,24 @@ namespace BGworker
             {
                 // Интегрирование
                 R += f(x) * delta;
-                int currentPercent = (int) Math.Round((x - a) / (b - a) * 100, 0);
+                int currentPercent = (int)Math.Round((x - a) / (b - a) * 100, 0);
                 // Определение хода выполнения
                 if (currentPercent != percent)
                 {
                     // Сообщить о ходе выполнения процесса
-                    w.ReportProgress(currentPercent);
+                    if (w != null)
+                    {
+                        w.ReportProgress(currentPercent);
+                    }
+                    else
+                    {
+                        progress.Value = currentPercent;
+                    }
                     // Сбросить счетчик
                     percent = currentPercent;
                 }
                 // Проверка на досрочное завершение
-                if (w.CancellationPending)
+                if ((w != null) && (w.CancellationPending))
                 {
                     return R;
                 }
@@ -109,7 +116,7 @@ namespace BGworker
                 {
                     bg.RunWorkerAsync(textN.Text);
                 }
-                // Integrator(0, Math.PI / 2, 1000000000, worker1);
+                // Integrator(0, Math.PI / 2, long.Parse(textN.Text), null);
                 // немного дизайна
                 buttonGo.BackColor = Color.LightCoral;
             }
