@@ -10,14 +10,14 @@ namespace WordGame
     public partial class Game : System.Web.UI.Page
     {
         /// <summary>
-        /// Воблебное слово
+        /// Волшебное слово
         /// </summary>
-        private const string Word = "СИНХРОНИЗАЦИЯ";
+        private const string Word = "ЭКВИВАЛЕНТНОСТЬ";
 
         /// <summary>
         /// Словарь
         /// </summary>
-        private Storage.WordList list;
+        private Storage.IDict dict;
 
         /// <summary>
         /// Счетчик нажатия на клавиши
@@ -89,7 +89,20 @@ namespace WordGame
             }
 
             // Загрузка словаря
-            list = Storage.WordList.Load("http://www.orioner.ru/croc/WordList.xml");
+            switch (Properties.Settings.Default.Source)
+            {
+                case "Database":
+                    dict = new Storage.Database();
+                    break;
+
+                case "XML":
+                    dict = Storage.WordList.Load("http://www.orioner.ru/croc/WordList.xml");
+                    break;
+
+                default:
+                    // наверное, сообщение об ошибке конфигурации
+                    break;
+            }
         }
 
         /// <summary>
@@ -114,7 +127,9 @@ namespace WordGame
             // Проверка слова по словарю
             Storage.Word w = new Storage.Word(word.Text);
             // Проверка на слово в словаре
-            if (list.Words.Contains(w, list))
+
+            // [*] if (list.Words.Contains(w, list))
+            if (dict.Contains(word.Text))
             {
                 ListItem item = new ListItem(word.Text);
                 // Поискать слово в списке на экране
@@ -193,14 +208,8 @@ namespace WordGame
         /// <param name="e"></param>
         protected void enter_Click(object sender, EventArgs e)
         {
-            // Перегнать массив в список
-            List<Storage.Word> l = list.Words.ToList();
-            // Добавление слова
-            l.Add(new Storage.Word(word.Text));
-            // Перегнать список в массив
-            list.Words = l.ToArray();
-            // Сохранить в файл
-            list.Save(@"C:\TEST.XML");
+            // Добавить слово в базу данных
+            dict.Append(word.Text);
         }
     }
 }

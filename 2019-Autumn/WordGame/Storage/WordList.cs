@@ -11,7 +11,7 @@ namespace WordGame.Storage
     /// Словарь слов
     /// </summary>
     [XmlRoot(ElementName = "WordList", Namespace = "http://www.orioner.ru/croc")]
-    public class WordList : IEqualityComparer<Word>
+    public class WordList : IEqualityComparer<Word>, IDict
     {
         /// <summary>
         /// Массив словарных слов
@@ -76,6 +76,33 @@ namespace WordGame.Storage
         public int GetHashCode(Word obj)
         {
             return obj.Name.GetHashCode();
+        }
+
+        /// <summary>
+        /// Проверка на наличие слова в словаре
+        /// </summary>
+        /// <param name="s">Слово</param>
+        /// <returns></returns>
+        public bool Contains(string s)
+        {
+            var w = new Word(s);
+            return Words.Contains(w, this);
+        }
+
+        /// <summary>
+        /// Добавление слова в словарь
+        /// </summary>
+        /// <param name="s">Новое слово</param>
+        public void Append(string s)
+        {
+            // Перегнать массив в список
+            List<Word> l = Words.ToList();
+            // Добавление слова
+            l.Add(new Word(s));
+            // Перегнать список в массив
+            Words = l.ToArray();
+            // Сохранить в файл
+            Save(@"C:\TEST.XML");
         }
     }
 }
