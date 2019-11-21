@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sinusoid", "Sinusoid\Sinuso
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordGame", "WordGame\WordGame.csproj", "{FCCF8BB2-55DB-45F4-B3ED-6D2B35E2DE47}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceWeb", "ServiceWeb\ServiceWeb.csproj", "{F282BE14-9FF8-4C27-B512-09559ED85E03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{6D53A42D-0383-4A2F-9D4E-1D8A9984001D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{FCCF8BB2-55DB-45F4-B3ED-6D2B35E2DE47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCCF8BB2-55DB-45F4-B3ED-6D2B35E2DE47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCCF8BB2-55DB-45F4-B3ED-6D2B35E2DE47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F282BE14-9FF8-4C27-B512-09559ED85E03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F282BE14-9FF8-4C27-B512-09559ED85E03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F282BE14-9FF8-4C27-B512-09559ED85E03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F282BE14-9FF8-4C27-B512-09559ED85E03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D53A42D-0383-4A2F-9D4E-1D8A9984001D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D53A42D-0383-4A2F-9D4E-1D8A9984001D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D53A42D-0383-4A2F-9D4E-1D8A9984001D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D53A42D-0383-4A2F-9D4E-1D8A9984001D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
