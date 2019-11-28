@@ -3,38 +3,74 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ServiceProcess;
 using System.ServiceModel;
+using System.Configuration.Install;
 
 namespace ConsoleApp
 {
     class Program
     {
-        /// <summary>
-        /// Домик для сервиса
-        /// </summary>
-        private static ServiceHost host;
-
         static void Main(string[] args)
         {
             try
             {
-                // Домик для сервиса
-                host = new ServiceHost(typeof (ConsoleService));
-                host.Open();
+                // Первый аргумент командной строки
+                string arg1 = (args.Count() > 0) ? args[0] : string.Empty;
 
-                // Оформление
-                Console.Title = "Консольное приложение";
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Привет, я консольное приложение");
+                // Имя исполняемого файла
+                string name = System.Reflection.Assembly.GetExecutingAssembly().Location;
+
+                switch (arg1.ToLower())
+                {
+                    case "install":
+                        ManagedInstallerClass.InstallHelper(new string[] { name });
+                        break;
+
+                    case "delete":
+                        ManagedInstallerClass.InstallHelper(new string[] { "/u", name });
+                        break;
+
+                    case "console":
+                        Console.Title = "Консольное приложение";
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Привет, я сервис в консольном режиме");
+                        var svc = new WinService();
+                        svc.Start();
+                        Console.ReadLine();
+                        svc.Stop();
+                        break;
+
+                    default:
+                        if (Environment.UserInteractive)
+                        {
+                            Console.WriteLine("Привет, я сервис. Запускай меня в консоли с параметром console");
+                        }
+                        else
+                        {
+                            // Запуск сервиса в режиме сервиса
+                            ServiceBase.Run(new WinService());
+                        }
+                        break;
+                }
+
             }
             catch (Exception ex)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(ex.Message);
+                if (Environment.UserInteractive)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(ex.Message);
+                }
             }
             finally
             {
-                Console.ReadLine();
+#if DEBUG
+                if (Environment.UserInteractive)
+                {
+                    Console.ReadLine();
+                }
+#endif
             }
         }
     }
