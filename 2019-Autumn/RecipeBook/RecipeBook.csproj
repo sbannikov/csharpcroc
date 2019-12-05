@@ -138,10 +138,19 @@
     <Compile Include="Migrations\201912051627551_000.designer.cs">
       <DependentUpon>201912051627551_000.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912051719169_001.cs" />
+    <Compile Include="Migrations\201912051719169_001.designer.cs">
+      <DependentUpon>201912051719169_001.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912051730137_002.cs" />
+    <Compile Include="Migrations\201912051730137_002.designer.cs">
+      <DependentUpon>201912051730137_002.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Storage\DB.cs" />
     <Compile Include="Storage\Entity.cs" />
+    <Compile Include="Storage\Ingredient.cs" />
     <Compile Include="Storage\Pizza.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -307,6 +316,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201912051627551_000.resx">
       <DependentUpon>201912051627551_000.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912051719169_001.resx">
+      <DependentUpon>201912051719169_001.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912051730137_002.resx">
+      <DependentUpon>201912051730137_002.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

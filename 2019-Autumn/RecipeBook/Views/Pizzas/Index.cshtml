@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<RecipeBook.Storage.Pizza>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Список рецептов";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Создать", "Create",null, new { @class = "btn btn-info" })
 </p>
 <table class="table">
     <tr>
@@ -47,9 +47,9 @@
             @Html.DisplayFor(modelItem => item.Active)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Правка", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Сведения", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Удаление", "Delete", new { id=item.ID })
         </td>
     </tr>
 }

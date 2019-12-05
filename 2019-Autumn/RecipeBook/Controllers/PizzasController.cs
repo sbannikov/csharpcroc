@@ -10,14 +10,24 @@ using RecipeBook.Storage;
 
 namespace RecipeBook.Controllers
 {
+    /// <summary>
+    /// Контроллер рецептов пиццы
+    /// </summary>
     public class PizzasController : Controller
     {
+        /// <summary>
+        /// База данных
+        /// </summary>
         private DB db = new DB();
 
-        // GET: Pizzas
+        /// <summary>
+        /// Список рецептов
+        /// GET: Pizzas
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
-            return View(db.Pizzas.ToList());
+            return View(db.Pizzas.OrderBy(a => a.Name).ToList());
         }
 
         // GET: Pizzas/Details/5
@@ -35,10 +45,14 @@ namespace RecipeBook.Controllers
             return View(pizza);
         }
 
-        // GET: Pizzas/Create
+        /// <summary>
+        /// Форма создания рецепта
+        /// GET: Pizzas/Create
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Create()
         {
-            return View();
+            return View("Create");
         }
 
         // POST: Pizzas/Create
@@ -46,8 +60,9 @@ namespace RecipeBook.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,Diameter,Price,Mass,Active")] Pizza pizza)
+        public ActionResult Create([Bind(Include = "Name,Diameter,Price,Mass,Active")] Pizza pizza)
         {
+            // Проверка на корректность данных
             if (ModelState.IsValid)
             {
                 pizza.ID = Guid.NewGuid();
@@ -56,6 +71,7 @@ namespace RecipeBook.Controllers
                 return RedirectToAction("Index");
             }
 
+            // Возврат к редактированию формы
             return View(pizza);
         }
 
