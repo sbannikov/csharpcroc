@@ -12,7 +12,7 @@ namespace WordGame
         /// <summary>
         /// Волшебное слово
         /// </summary>
-        private const string Word = "ЭКВИВАЛЕНТНОСТЬ";
+        private const string Word = "ЭКВИВАЛЕНТНОСТЬ";       
 
         /// <summary>
         /// Словарь
@@ -173,7 +173,7 @@ namespace WordGame
             }
             catch (Exception ex)
             {
-                // errors.error.Text = ex.Message;
+                error.Text = ex.Message;
             }
         }
 
