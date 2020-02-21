@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.button0 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -49,6 +50,7 @@
             this.ClientSize = new System.Drawing.Size(574, 332);
             this.Controls.Add(this.button0);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Задача МАРС";
