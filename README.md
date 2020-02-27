@@ -8,6 +8,7 @@ Samples - примеры приложений
 * ConsoleThreads - многопоточное консольное приложение
 * ExcelSample - пример работы с файлом Microsoft Excel
 * LogicForm - простой дизайнер логических схем
+* MarsChallenge - решение задачи Фридриха и Милса (см. также https://www.adme.ru/svoboda-avtorskie-kolonki/esli-vy-reshite-etu-golovolomku-vam-ne-strashny-nikakie-zhiznennye-trudnosti-1699015/)
 * Piano - многоголосное пианино на 4 октавы
 * SampleUdf - Microsoft SQL Server User Defined Function (CLR)
 * SnmpReaderService - чтение данных по протоколу SNMP (сервис операционной системы Windows)
