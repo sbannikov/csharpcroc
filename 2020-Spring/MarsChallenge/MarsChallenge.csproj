@@ -36,7 +36,7 @@
     <StartupObject>MarsChallenge.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>iconfinder_Citycons_ship_1342928.ico</ApplicationIcon>
+    <ApplicationIcon>iconfinder_Mars_89140.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -87,7 +87,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="iconfinder_Citycons_ship_1342928.ico" />
+    <Content Include="iconfinder_Mars_89140.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
