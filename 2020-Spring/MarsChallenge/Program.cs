@@ -16,6 +16,7 @@ namespace MarsChallenge
         /// </summary>
         static void Main()
         {
+            // Запуск главной формы
             Application.Run(new MainForm());
         }
     }
