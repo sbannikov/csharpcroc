@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarsChallenge", "MarsChallenge\MarsChallenge.csproj", "{B3651CBE-E775-4E25-A132-AC4580CF8635}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleXML", "SampleXML\SampleXML.csproj", "{6BFF5A7E-B516-4C1D-8514-22425FDD833A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B3651CBE-E775-4E25-A132-AC4580CF8635}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3651CBE-E775-4E25-A132-AC4580CF8635}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3651CBE-E775-4E25-A132-AC4580CF8635}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BFF5A7E-B516-4C1D-8514-22425FDD833A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BFF5A7E-B516-4C1D-8514-22425FDD833A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BFF5A7E-B516-4C1D-8514-22425FDD833A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BFF5A7E-B516-4C1D-8514-22425FDD833A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
