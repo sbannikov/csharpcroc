@@ -6,12 +6,12 @@ using System.Runtime.InteropServices;
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанные с этой сборкой.
 [assembly: AssemblyTitle("SampleXML")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Пример сериализации и десериализации в формате XML")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SampleXML")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCompany("ЗАО КРОК инкорпорейтед")]
+[assembly: AssemblyProduct("Учебный курс 'Разработка приложений на языке С#'")]
+[assembly: AssemblyCopyright("Copyright © CROC incorporated 2020")]
+[assembly: AssemblyTrademark("BrainZ")]
 [assembly: AssemblyCulture("")]
 
 // Установка значения False для параметра ComVisible делает типы в этой сборке невидимыми

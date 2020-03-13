@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarsChallenge", "MarsChalle
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleXML", "SampleXML\SampleXML.csproj", "{6BFF5A7E-B516-4C1D-8514-22425FDD833A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordAssistant", "WordAssistant\WordAssistant.csproj", "{672CBF8D-3FB9-45FB-97DF-AD208865ABC5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{6BFF5A7E-B516-4C1D-8514-22425FDD833A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BFF5A7E-B516-4C1D-8514-22425FDD833A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BFF5A7E-B516-4C1D-8514-22425FDD833A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{672CBF8D-3FB9-45FB-97DF-AD208865ABC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{672CBF8D-3FB9-45FB-97DF-AD208865ABC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{672CBF8D-3FB9-45FB-97DF-AD208865ABC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{672CBF8D-3FB9-45FB-97DF-AD208865ABC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
