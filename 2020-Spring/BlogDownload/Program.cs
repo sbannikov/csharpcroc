@@ -22,8 +22,9 @@ namespace BlogDownload
                     item.Download();
                     Console.WriteLine($"{item} загружен");
                     item.Save(db);
-                    Thread.Sleep(1000);
-                    break;
+                    // Прерываемся если пользователь нажал кнопку
+                    if (Console.KeyAvailable) { break; }
+                    Thread.Sleep(5000);                
                 }
             }
             catch (Exception ex)

@@ -5,8 +5,11 @@
     <Setting Name="ConnectionString" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Server=.\SQLEXPRESS;Database=BLOG;Integrated Security=SSPI;</Value>
     </Setting>
-    <Setting Name="Root" Type="System.String" Scope="Application">
+    <Setting Name="WebRoot" Type="System.String" Scope="Application">
       <Value Profile="(Default)">https://gvendolen-arterberk.wixsite.com/gvendolen/post/</Value>
+    </Setting>
+    <Setting Name="FileRoot" Type="System.String" Scope="User">
+      <Value Profile="(Default)">c:\blog\</Value>
     </Setting>
   </Settings>
 </SettingsFile>
