@@ -31,6 +31,10 @@ namespace BlogDownload
         /// </summary>
         public string Title;
         /// <summary>
+        /// Описание публикации с сайта
+        /// </summary>
+        public string Description;
+        /// <summary>
         /// Суффикс URL
         /// </summary>
         public string URL;
@@ -80,7 +84,11 @@ namespace BlogDownload
             // Проверка на существование файла
             if (System.IO.File.Exists(name))
             {
+                // Выведеим строку красным цветом
+                var old = Console.ForegroundColor;
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"(!) Файл {name} уже существует и будет перезаписан.");
+                Console.ForegroundColor = old;
             }
             return name;
         }
@@ -103,12 +111,28 @@ namespace BlogDownload
             // Сохранение загруженной веб-страницы в файл
             System.IO.File.WriteAllText(CheckFile($@"{root}txt\{URL}.html"), s);
 
-            // Поиск заголовока по регулярному выражению
-            // Примечание: og:description содержит начало текста статьи, но не полностью
+            // Поиск заголовока регулярным выражением
             var title = Regex.Match(s, @"<meta property=""og:title"" content=""([^""]+)""/>");
             if (title.Success)
             {
                 Title = title.Groups[1].Value;
+            }
+            else
+            {
+                Console.WriteLine("(!) заголовок не найден");
+            }
+
+            // Поиск описания регулярным выражением
+            var descr = Regex.Match(s, @"<meta property=""og:description"" content=""([^""]+)""/>");
+            if (descr.Success)
+            {
+                Description = descr.Groups[1].Value;
+                // Замена HTML-представления на нормальную кавычку
+                Description = Description.Replace("&quot;", @"""");
+            }
+            else
+            {
+                Console.WriteLine("(!) описание не найдено");
             }
 
             // Поиск картинки регулярным выражением
@@ -120,6 +144,10 @@ namespace BlogDownload
                 // Загрузка картинки в файл
                 client.DownloadFile(urli, CheckFile($@"{root}img\{URL}.png"));
             }
+            else
+            {
+                Console.WriteLine("(!) изображение не найдено");
+            }
 
             // Поиск текста сообщения регулярным выражением
             var message = Regex.Match(s, @"<article class=""blog-post-page-font"">(.+?)</article>");
@@ -128,7 +156,11 @@ namespace BlogDownload
                 // Строка с тегами
                 string m = message.Groups[1].Value;
                 // Очистка от тегов
-                Body = Regex.Replace(m, "<.*?>", String.Empty);
+                Body = Regex.Replace(m, "<.*?>", string.Empty);
+            }
+            else
+            {
+                Console.WriteLine("(!) текст сообщения не найден");
             }
         }
 
@@ -140,9 +172,10 @@ namespace BlogDownload
         {
             // Создание параметрического запроса
             SqlCommand cmd = db.GetCommand();
-            cmd.CommandText = "UPDATE Blog SET Body = @body, Title=@title WHERE ID = @id";
+            cmd.CommandText = "UPDATE Blog SET Body = @body, Title=@title, Description=@descr WHERE ID = @id";
             cmd.Parameters.AddWithValue("id", ID);
             cmd.Parameters.AddWithValue("body", Body);
+            cmd.Parameters.AddWithValue("descr", Description);
             cmd.Parameters.AddWithValue("title", Title);
 
             // Обновление записи в БД

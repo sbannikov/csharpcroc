@@ -46,7 +46,7 @@ namespace BlogDownload
         {
             // Формирование запроса к БД
             SqlCommand cmd = GetCommand();
-            // Только записи с заполненным полем URL
+            // Все записи
             cmd.CommandText = "SELECT COUNT(*) FROM [Blog]";
             // Скалярный запрос к БД
             int count = (int)cmd.ExecuteScalar();
