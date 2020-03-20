@@ -30,6 +30,30 @@ namespace BlogDownload
         }
 
         /// <summary>
+        /// Создание команды БД
+        /// </summary>
+        /// <returns></returns>
+        public SqlCommand GetCommand()
+        { 
+            return conn.CreateCommand(); 
+        }
+
+        /// <summary>
+        /// Количество строк в списке публикаций
+        /// </summary>
+        /// <returns></returns>
+        public int GetBlogCount()
+        {
+            // Формирование запроса к БД
+            SqlCommand cmd = GetCommand();
+            // Только записи с заполненным полем URL
+            cmd.CommandText = "SELECT COUNT(*) FROM [Blog]";
+            // Скалярный запрос к БД
+            int count = (int)cmd.ExecuteScalar();
+            return count;
+        }
+
+        /// <summary>
         /// Прочитать список записей из БД
         /// </summary>
         /// <returns></returns>
@@ -38,9 +62,9 @@ namespace BlogDownload
             var list = new List<BlogItem>();
 
             // Формирование запроса к БД
-            SqlCommand cmd = conn.CreateCommand();
+            SqlCommand cmd = GetCommand();
             // Только записи с заполненным полем URL
-            cmd.CommandText = "SELECT [ID], [Date], [Topic], [URL], ISNULL([Instagram], ''), [Image] FROM [Blog] WHERE NOT URL IS NULL";
+            cmd.CommandText = "SELECT [ID], [Date], [Topic], [URL], ISNULL([Instagram], ''), [Image] FROM [Blog] WHERE NOT URL IS NULL AND Body IS NULL";
 
             // Выполнение запроса на чтение таблицы
             SqlDataReader rdr = cmd.ExecuteReader();

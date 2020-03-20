@@ -31,5 +31,14 @@ namespace BlogDownload.Properties {
                 return ((string)(this["ConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://gvendolen-arterberk.wixsite.com/gvendolen/post/")]
+        public string Root {
+            get {
+                return ((string)(this["Root"]));
+            }
+        }
     }
 }
