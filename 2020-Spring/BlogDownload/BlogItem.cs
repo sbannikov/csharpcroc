@@ -94,6 +94,17 @@ namespace BlogDownload
         }
 
         /// <summary>
+        /// Очистка строки от спецсимволов (например, &quot;)
+        /// </summary>
+        /// <param name="s">Строка</param>
+        /// <returns></returns>
+        private static string Clean(string s)
+        {
+            return s.Replace("&quot;", @"""");
+        }
+
+
+        /// <summary>
         /// Загрузить статью из интернета
         /// </summary>
         public void Download()
@@ -128,7 +139,7 @@ namespace BlogDownload
             {
                 Description = descr.Groups[1].Value;
                 // Замена HTML-представления на нормальную кавычку
-                Description = Description.Replace("&quot;", @"""");
+                Description = Clean(Description);
             }
             else
             {
@@ -155,8 +166,8 @@ namespace BlogDownload
             {
                 // Строка с тегами
                 string m = message.Groups[1].Value;
-                // Очистка от тегов
-                Body = Regex.Replace(m, "<.*?>", string.Empty);
+                // Очистка от тегов и спецсимволов
+                Body = Clean(Regex.Replace(m, "<.*?>", string.Empty));               
             }
             else
             {
