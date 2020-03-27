@@ -28,14 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.watch = new System.IO.FileSystemWatcher();
+            ((System.ComponentModel.ISupportInitialize)(this.watch)).BeginInit();
             // 
             // GenericService
             // 
+            this.AutoLog = false;
             this.CanPauseAndContinue = true;
             this.ServiceName = "GenericService";
+            ((System.ComponentModel.ISupportInitialize)(this.watch)).EndInit();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Timer timer;
+        private System.IO.FileSystemWatcher watch;
     }
 }

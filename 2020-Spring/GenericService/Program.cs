@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Reflection;
 using System.Configuration.Install;
 using System.ServiceProcess;
+using System.Diagnostics;
 
 namespace GenericServiceApp
 {
@@ -15,9 +16,14 @@ namespace GenericServiceApp
     class Program
     {
         /// <summary>
+        /// Сервис
+        /// </summary>
+        private static GenericService svc;
+
+        /// <summary>
         /// Главная функция программы
         /// </summary>
-        /// <param name="args"></param>
+        /// <param name="args">Параметры командной строки</param>
         static void Main(string[] args)
         {
             // Интерактивный запуск без параметров командной строки
@@ -39,6 +45,19 @@ namespace GenericServiceApp
             // Селектор режимов запуска
             switch (arg1)
             {
+                case "console":
+                    // Создание сервиса
+                    svc = new GenericService();
+                    svc.Start();
+                    Console.Title = "Сервис в консольном режиме";
+                    // Номер версии файла
+                    string version = FileVersionInfo.GetVersionInfo(name).FileVersion.ToString();
+                    Console.WriteLine($"{svc.ServiceName} {version}");
+                    Console.WriteLine("Сервис запущен в консольном режиме. Для останова нажмите Enter");
+                    Console.ReadLine();
+                    svc.Stop();
+                    break;
+
                 case "install":
                     // Установка сервиса (службы) операционной системы
                     ManagedInstallerClass.InstallHelper(new string[] { name });
@@ -53,7 +72,7 @@ namespace GenericServiceApp
 
                 default:
                     // Создание сервиса
-                    GenericService svc = new GenericService();
+                    svc = new GenericService();
                     // Запуск сервиса
                     ServiceBase.Run(svc);
                     break;
