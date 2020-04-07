@@ -31,11 +31,13 @@ namespace Transfusion.Storage
         /// Сосуды
         /// </summary>
         public DbSet<Vessel> Vessels { get; set; }
+
         /// <summary>
         /// Конструктор БД
         /// </summary>
-        public Database()
+        public Database(DbContextOptions<Database> options) : base (options)
         {
+            Database.EnsureCreated();
         }
     }
 }

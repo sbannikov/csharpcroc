@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
 
 namespace Transfusion
 {
@@ -19,9 +20,16 @@ namespace Transfusion
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// </summary>
         public void ConfigureServices(IServiceCollection services)
         {
+            // Строка соединения из файла конфигурации приложения
+            string cs = Configuration.GetConnectionString("Database");
+            // Контекст базы данных как сервис приложения
+            services.AddDbContext<Storage.Database>(options => options.UseSqlServer(cs));
+
             services.AddRazorPages();
         }
 
