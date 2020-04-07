@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogDownload", "BlogDownloa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericServiceApp", "GenericService\GenericServiceApp.csproj", "{415A07E1-D732-4221-BDDC-F38343A4E7A8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transfusion", "Transfusion\Transfusion.csproj", "{DA85E60E-C096-4094-889C-69D5AE93107E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{415A07E1-D732-4221-BDDC-F38343A4E7A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{415A07E1-D732-4221-BDDC-F38343A4E7A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{415A07E1-D732-4221-BDDC-F38343A4E7A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA85E60E-C096-4094-889C-69D5AE93107E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA85E60E-C096-4094-889C-69D5AE93107E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA85E60E-C096-4094-889C-69D5AE93107E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA85E60E-C096-4094-889C-69D5AE93107E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
