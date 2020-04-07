@@ -19,5 +19,10 @@ namespace Transfusion.Storage
         /// Сосуды
         /// </summary>
         public virtual ICollection<Vessel> Vessels { get; set; }
+
+        /// <summary>
+        /// Состояния
+        /// </summary>
+        public virtual ICollection<State> States { get; set; }
     }
 }
