@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Transfusion.Storage;
 
-namespace Transfusion.Puzzles
+namespace Transfusion.Vessels
 {
     public class DetailsModel : PageModel
     {
@@ -18,7 +18,7 @@ namespace Transfusion.Puzzles
             _context = context;
         }
 
-        public Puzzle Puzzle { get; set; }
+        public Vessel Vessel { get; set; }
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
@@ -27,11 +27,9 @@ namespace Transfusion.Puzzles
                 return NotFound();
             }
 
-            Puzzle = await _context.Puzzles
-                .Include("Vessels")
-                .FirstOrDefaultAsync(m => m.ID == id);
+            Vessel = await _context.Vessels.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (Puzzle == null)
+            if (Vessel == null)
             {
                 return NotFound();
             }

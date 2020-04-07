@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Transfusion.Storage;
 
-namespace Transfusion.Puzzles
+namespace Transfusion.Vessels
 {
     public class IndexModel : PageModel
     {
@@ -18,16 +18,11 @@ namespace Transfusion.Puzzles
             _context = context;
         }
 
-        public IList<Puzzle> Puzzle { get;set; }
+        public IList<Vessel> Vessel { get;set; }
 
-        /// <summary>
-        /// GET
-        /// </summary>
-        /// <returns></returns>
         public async Task OnGetAsync()
         {
-            // Список головоломок, отсортированный по имени
-            Puzzle = await _context.Puzzles.OrderBy(a=>a.Name).ToListAsync();
+            Vessel = await _context.Vessels.ToListAsync();
         }
     }
 }

@@ -1,15 +1,13 @@
 ﻿@page
-@model Transfusion.DetailsModel
+@model Transfusion.Puzzles.DetailsModel
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Просмотр головоломки</h1>
 
 <div>
-    <h4>Puzzle</h4>
-    <hr />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Puzzle.Name)
@@ -20,6 +18,36 @@
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Puzzle.ID">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Edit" asp-route-id="@Model.Puzzle.ID">Редактировать</a> |
+    <a asp-page="./Index">Возврат в список</a>
 </div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Puzzle.Vessels)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Puzzle.Vessels != null)
+        {
+            foreach (var item in Model.Puzzle.Vessels.OrderBy(a => a.Number))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Number)
+                    </td>
+                    <td>
+                        <a asp-page="/Vessels/Edit" asp-route-id="@item.ID" class="btn btn-info">Редактировать</a> |
+                        <a asp-page="/Vessels/Delete" asp-route-id="@item.ID" class="btn btn-danger">Удалить</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<a href="/Vessels/Create?puzzleid=@Model.Puzzle.ID">Добавить сосуд</a>

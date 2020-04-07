@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Transfusion.Storage;
 
-namespace Transfusion.Puzzles
+namespace Transfusion.Vessels
 {
     public class EditModel : PageModel
     {
@@ -20,7 +20,7 @@ namespace Transfusion.Puzzles
         }
 
         [BindProperty]
-        public Puzzle Puzzle { get; set; }
+        public Vessel Vessel { get; set; }
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
@@ -29,9 +29,9 @@ namespace Transfusion.Puzzles
                 return NotFound();
             }
 
-            Puzzle = await _context.Puzzles.FirstOrDefaultAsync(m => m.ID == id);
+            Vessel = await _context.Vessels.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (Puzzle == null)
+            if (Vessel == null)
             {
                 return NotFound();
             }
@@ -47,7 +47,7 @@ namespace Transfusion.Puzzles
                 return Page();
             }
 
-            _context.Attach(Puzzle).State = EntityState.Modified;
+            _context.Attach(Vessel).State = EntityState.Modified;
 
             try
             {
@@ -55,7 +55,7 @@ namespace Transfusion.Puzzles
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PuzzleExists(Puzzle.ID))
+                if (!VesselExists(Vessel.ID))
                 {
                     return NotFound();
                 }
@@ -65,12 +65,13 @@ namespace Transfusion.Puzzles
                 }
             }
 
-            return RedirectToPage("./Index");
+            // Возврат к просмотру головоломки
+            return RedirectToPage("/Puzzles/Details", new { id = Vessel.PuzzleID });
         }
 
-        private bool PuzzleExists(Guid id)
+        private bool VesselExists(Guid id)
         {
-            return _context.Puzzles.Any(e => e.ID == id);
+            return _context.Vessels.Any(e => e.ID == id);
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,6 +20,7 @@ namespace Transfusion.Storage
         /// <summary>
         /// Порядковый номер сосуда, начиная с 1
         /// </summary>
+        [Display(Name = "Порядковый номер, начиная с 1")]
         public int Number
         {
             get
@@ -26,6 +29,7 @@ namespace Transfusion.Storage
             }
             set
             {
+                // Несколько избыточный контроль корректности данных
                 if (value < 1)
                 {
                     throw new Exception("Номер сосуда - натуральное число");
@@ -35,8 +39,20 @@ namespace Transfusion.Storage
         }
 
         /// <summary>
+        /// Объем
+        /// </summary>
+        [Display(Name = "Объем")] 
+        public int Volume { get; set; }
+
+        /// <summary>
+        /// Идентификатор головоломки
+        /// </summary>
+        public Nullable<Guid> PuzzleID { get; set; }
+
+        /// <summary>
         /// Головоломка, к которой относится сосуд
         /// </summary>
+        [ForeignKey("PuzzleID")]
         public Puzzle Puzzle { get; set; }
     }
 }

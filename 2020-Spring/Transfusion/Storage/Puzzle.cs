@@ -14,5 +14,10 @@ namespace Transfusion.Storage
         /// Наименование головоломки
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Сосуды
+        /// </summary>
+        public virtual ICollection<Vessel> Vessels { get; set; }
     }
 }

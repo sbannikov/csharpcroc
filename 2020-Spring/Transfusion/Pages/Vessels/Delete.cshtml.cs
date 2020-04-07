@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Transfusion.Storage;
 
-namespace Transfusion.Puzzles
+namespace Transfusion.Vessels
 {
     public class DeleteModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace Transfusion.Puzzles
         }
 
         [BindProperty]
-        public Puzzle Puzzle { get; set; }
+        public Vessel Vessel { get; set; }
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
@@ -28,9 +28,9 @@ namespace Transfusion.Puzzles
                 return NotFound();
             }
 
-            Puzzle = await _context.Puzzles.FirstOrDefaultAsync(m => m.ID == id);
+            Vessel = await _context.Vessels.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (Puzzle == null)
+            if (Vessel == null)
             {
                 return NotFound();
             }
@@ -44,15 +44,18 @@ namespace Transfusion.Puzzles
                 return NotFound();
             }
 
-            Puzzle = await _context.Puzzles.FindAsync(id);
+            Vessel = await _context.Vessels.FindAsync(id);
+            // Сохранить идентификатор головоломки
+            Guid? puzzleid = Vessel.PuzzleID;
 
-            if (Puzzle != null)
+            if (Vessel != null)
             {
-                _context.Puzzles.Remove(Puzzle);
+                _context.Vessels.Remove(Vessel);
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            // Возврат к просмотру головоломки
+            return RedirectToPage("/Puzzles/Details", new { id = puzzleid });
         }
     }
 }

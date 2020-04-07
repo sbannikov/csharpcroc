@@ -1,5 +1,5 @@
 ﻿@page
-@model Transfusion.Puzzles.IndexModel
+@model Transfusion.Vessels.IndexModel
 
 @{
     ViewData["Title"] = "Index";
@@ -14,16 +14,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Puzzle[0].Name)
+                @Html.DisplayNameFor(model => model.Vessel[0].Number)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Puzzle) {
+@foreach (var item in Model.Vessel) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.Number)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |

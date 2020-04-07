@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Transfusion.Storage;
 
-namespace Transfusion.Puzzles
+namespace Transfusion.Vessels
 {
     public class CreateModel : PageModel
     {
@@ -18,13 +18,23 @@ namespace Transfusion.Puzzles
             _context = context;
         }
 
-        public IActionResult OnGet()
+        /// <summary>
+        /// Форма добавления нового сосуда
+        /// </summary>
+        /// <param name="puzzleid">Идентификатор головоломки</param>
+        /// <returns></returns>
+        public IActionResult OnGet(Guid? puzzleid)
         {
+            // Создать сосуд и сохранить в нем идентификатор головоломки
+            Vessel = new Vessel()
+            {
+                PuzzleID = puzzleid
+            };
             return Page();
         }
 
         [BindProperty]
-        public Puzzle Puzzle { get; set; }
+        public Vessel Vessel { get; set; }
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
@@ -35,10 +45,12 @@ namespace Transfusion.Puzzles
                 return Page();
             }
 
-            _context.Puzzles.Add(Puzzle);
+            // Сохранение нового объекта в БД
+            _context.Vessels.Add(Vessel);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            // Возврат к просмотру головоломки
+            return RedirectToPage("/Puzzles/Details", new { id = Vessel.PuzzleID });
         }
     }
 }
