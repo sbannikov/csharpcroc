@@ -20,7 +20,7 @@ namespace Transfusion.Storage
         /// Состояние
         /// </summary>
         [ForeignKey("StateID")]
-        public virtual  State State { get; set; }
+        public virtual State State { get; set; }
         /// <summary>
         /// Идентификатор сосуда
         /// </summary>
@@ -37,5 +37,25 @@ namespace Transfusion.Storage
         /// </summary>
         [Display(Name = "Уровень жидкости")]
         public int? Value { get; set; }
+
+        /// <summary>
+        /// Свободное место в сосуде
+        /// </summary>
+        public int Free
+        {
+            get
+            {
+                return Vessel.Volume - Value.Value;
+            }
+        }
+
+        /// <summary>
+        /// Строковое представление объекта
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return Value.ToString();
+        }
     }
 }

@@ -28,6 +28,11 @@ namespace Transfusion.Puzzles
         /// </summary>
         public List<StateOfVessel> StartState { get; set; }
 
+        /// <summary>
+        /// Целевое состояние головоломки
+        /// </summary>
+        public List<StateOfVessel> FinalState { get; set; }
+
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
             if (id == null)
@@ -47,27 +52,14 @@ namespace Transfusion.Puzzles
                 return NotFound();
             }
 
-            // Загрузка начального состояния
-            State start = Puzzle.States.Where(a => a.SType == StateType.Start).FirstOrDefault();
-            // Проверка на наличие стартового состояния
-            if (start == null)
-            {
-                // Создание стартового состояния
-                start = new State()
-                {
-                    PuzzleID = Puzzle.ID,
-                    SType = StateType.Start
-                };
-                // Добавление в таблицу состояний
-                _context.States.Add(start);
-                // Сохранение изменений в БД
-                await _context.SaveChangesAsync();
-            }
-            _context.AddMoves(start);
+            // Загрузка начального и конечного состояний
+            State start = _context.GetState(id.Value, StateType.Start);
+            State final = _context.GetState(id.Value, StateType.Final);
 
             // Список
             StartState = _context.StatesOfVessels.Where(a => a.State.ID == start.ID).ToList();
-           
+            FinalState = _context.StatesOfVessels.Where(a => a.State.ID == final.ID).ToList();
+
             return Page();
         }
     }

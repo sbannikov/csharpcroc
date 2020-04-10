@@ -20,8 +20,12 @@ namespace Transfusion.Storage
         /// </summary>
         Intermediate = 2,
         /// <summary>
-        /// Целевое состояние
+        /// Целевое состояние (могут быть неполные данные)
         /// </summary>
-        Final = 3
+        Final = 3,
+        /// <summary>
+        /// Конечное состояние после решения
+        /// </summary>
+        Solution = 4
     }
 }

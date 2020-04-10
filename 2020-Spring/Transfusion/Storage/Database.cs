@@ -90,5 +90,34 @@ namespace Transfusion.Storage
             // Сохранение изменений в БД
             SaveChanges();
         }
+
+        /// <summary>
+        /// Вернуть состояние заданного типа
+        /// Создает новое состояние, если оно не существует
+        /// </summary>
+        /// <param name="puzzleid">Идентификатор головоломки</param>
+        /// <param name="type">Тип состояния</param>
+        /// <returns></returns>
+        public State GetState(Guid puzzleid, StateType type)
+        {
+            State state = States.Where(a => a.SType == type && a.PuzzleID == puzzleid).FirstOrDefault();
+            
+            // Проверка на наличие состояния заданного типа
+            if (state == null)
+            {
+                // Создание состояния заданного типа
+                state = new State()
+                {
+                    PuzzleID = puzzleid,
+                    SType = type
+                };
+                // Добавление в таблицу состояний
+                States.Add(state);
+                // Сохранение изменений в БД
+                SaveChanges();
+            }
+
+            return state;
+        }
     }
 }

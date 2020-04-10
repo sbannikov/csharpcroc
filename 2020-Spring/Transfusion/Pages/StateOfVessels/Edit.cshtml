@@ -19,6 +19,9 @@
                 <span asp-validation-for="StateOfVessel.Value" class="text-danger"></span>
             </div>
             <input type="hidden" asp-for="StateOfVessel.ID" />
+            <input type="hidden" asp-for="StateOfVessel.StateID" />
+            <input type="hidden" asp-for="StateOfVessel.VesselID" />
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

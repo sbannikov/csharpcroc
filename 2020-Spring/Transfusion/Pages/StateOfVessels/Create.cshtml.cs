@@ -24,12 +24,12 @@ namespace Transfusion.StateOfVessels
         /// </summary>
         /// <param name="vesselid">Идентификатор сосуда</param>
         /// <returns></returns>
-        public IActionResult OnGet(Guid? vesselid)
+        public IActionResult OnGet(Guid? vesselid, StateType type)
         {
             // Вычисление идентификатора стартового события:
             // Сосуд
             Vessel vessel = _context.Vessels.Find(vesselid);
-            State state = _context.States.FirstOrDefault(a => a.PuzzleID == vessel.PuzzleID && a.SType == StateType.Start);
+            State state = _context.States.FirstOrDefault(a => a.PuzzleID == vessel.PuzzleID && a.SType == type);
 
             // Создать сосуд и сохранить в нем идентификатор головоломки
             StateOfVessel = new StateOfVessel()
