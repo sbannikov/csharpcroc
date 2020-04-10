@@ -28,7 +28,9 @@ namespace Transfusion
             // Строка соединения из файла конфигурации приложения
             string cs = Configuration.GetConnectionString("Database");
             // Контекст базы данных как сервис приложения
-            services.AddDbContext<Storage.Database>(options => options.UseSqlServer(cs));
+            services.AddDbContext<Storage.Database>(options => options
+                .UseLazyLoadingProxies() // ленивая загрузка объектов - по требованию
+                .UseSqlServer(cs));
 
             services.AddRazorPages();
         }

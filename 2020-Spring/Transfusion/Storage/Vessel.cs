@@ -53,6 +53,6 @@ namespace Transfusion.Storage
         /// Головоломка, к которой относится сосуд
         /// </summary>
         [ForeignKey("PuzzleID")]
-        public Puzzle Puzzle { get; set; }
+        public virtual Puzzle Puzzle { get; set; }
     }
 }

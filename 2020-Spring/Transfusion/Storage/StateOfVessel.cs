@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace Transfusion.Storage
         /// Состояние
         /// </summary>
         [ForeignKey("StateID")]
-        public State State { get; set; }
+        public virtual  State State { get; set; }
         /// <summary>
         /// Идентификатор сосуда
         /// </summary>
@@ -28,12 +29,13 @@ namespace Transfusion.Storage
         /// Сосуд
         /// </summary>
         [ForeignKey("VesselID")]
-        public Vessel Vessel { get; set; }
+        public virtual Vessel Vessel { get; set; }
 
         /// <summary>
         /// Уровень жидкости в данном сосуде
         /// NULL - если не определено (для конечного состояния)
         /// </summary>
+        [Display(Name = "Уровень жидкости")]
         public int? Value { get; set; }
     }
 }

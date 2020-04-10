@@ -14,7 +14,7 @@ namespace Transfusion.Storage
         /// <summary>
         /// Тип состояния
         /// </summary>
-        public StateType SType { get; set; }
+        public virtual StateType SType { get; set; }
         /// <summary>
         /// Идентификатор головоломки
         /// </summary>
@@ -22,7 +22,12 @@ namespace Transfusion.Storage
         /// <summary>
         /// Головоломка
         /// </summary>
-        [ForeignKey("PuzzleID")] 
-        public Puzzle Puzzle { get; set; }
+        [ForeignKey("PuzzleID")]
+        public virtual Puzzle Puzzle { get; set; }
+
+        /// <summary>
+        /// Состояния сосудов
+        /// </summary>
+        public virtual ICollection<StateOfVessel> StateOfVessels { get; set; }
     }
 }

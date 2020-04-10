@@ -63,6 +63,8 @@ namespace Transfusion.Puzzles
                 // Сохранение изменений в БД
                 await _context.SaveChangesAsync();
             }
+            _context.AddMoves(start);
+
             // Список
             StartState = _context.StatesOfVessels.Where(a => a.State.ID == start.ID).ToList();
            

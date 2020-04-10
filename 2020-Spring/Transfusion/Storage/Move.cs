@@ -13,18 +13,18 @@ namespace Transfusion.Storage
         /// <summary>
         /// Исходное состояние
         /// </summary>
-        public State FromState { get; set; }
+        public virtual State FromState { get; set; }
         /// <summary>
         /// Конечное состояние
         /// </summary>
-        public State ToState { get; set; }
+        public virtual State ToState { get; set; }
         /// <summary>
         /// Сосуд, из которого отливаем воду
         /// </summary>
-        public Vessel FromVessel { get; set; }
+        public virtual Vessel FromVessel { get; set; }
         /// <summary>
         /// Сосуд, в который наливаем воду
         /// </summary>
-        public Vessel ToVessel { get; set; }
+        public virtual Vessel ToVessel { get; set; }
     }
 }
