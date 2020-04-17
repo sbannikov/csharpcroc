@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
+using System.ServiceModel;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,12 @@ namespace GenericServiceApp
         /// <summary>
         /// Объект для ведения журнала сообщений
         /// </summary>
-        private Logger log = LogManager.GetLogger("GenericService");
+        public static readonly Logger Log = LogManager.GetLogger("GenericService");
+
+        /// <summary>
+        /// Домик для сервиса
+        /// </summary>
+        private ServiceHost host;
 
         /// <summary>
         /// Конструктор по умолчанию
@@ -35,6 +41,9 @@ namespace GenericServiceApp
             watch.Created += Watch_Event;
             watch.Deleted += Watch_Event;
             watch.Renamed += Watch_Event;
+
+            // Домик для сервиса
+            host = new ServiceHost(typeof (WcfService));
         }
 
         /// <summary>
@@ -46,13 +55,13 @@ namespace GenericServiceApp
         {
             try
             {
-                log.Trace($"Watch_Event ({sender}, {e})");
-                log.Info($"{e.ChangeType};{e.FullPath}");
-                log.Trace("Watch_Event - выход");
+                Log.Trace($"Watch_Event ({sender}, {e})");
+                Log.Info($"{e.ChangeType};{e.FullPath}");
+                Log.Trace("Watch_Event - выход");
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+                Log.Error(ex);
             }
         }
 
@@ -72,13 +81,14 @@ namespace GenericServiceApp
         {
             try
             {
+                host.Open();
                 watch.EnableRaisingEvents = true;
                 EventLog.WriteEntry("Сервис запущен", EventLogEntryType.Information, 1);
-                log.Info("Сервис запущен");
+                Log.Info("Сервис запущен");
             }
             catch (Exception ex)
             {
-                log.Fatal(ex);
+                Log.Fatal(ex);
             }
         }
 
@@ -89,13 +99,14 @@ namespace GenericServiceApp
         {
             try
             {
+                host.Close();
                 watch.EnableRaisingEvents = false;
                 EventLog.WriteEntry("Сервис остановлен", EventLogEntryType.Information, 2);
-                log.Info("Сервис остановлен");
+                Log.Info("Сервис остановлен");
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+                Log.Error(ex);
             }
         }
 
@@ -108,11 +119,11 @@ namespace GenericServiceApp
             {
                 watch.EnableRaisingEvents = false;
                 EventLog.WriteEntry("Сервис приостановлен", EventLogEntryType.Information, 3);
-                log.Info("Сервис приостановлен");
+                Log.Info("Сервис приостановлен");
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+                Log.Error(ex);
             }
         }
 
@@ -125,11 +136,11 @@ namespace GenericServiceApp
             {
                 watch.EnableRaisingEvents = true;
                 EventLog.WriteEntry("Сервис возобновлен", EventLogEntryType.Information, 4);
-                log.Info("Сервис возобновлен");
+                Log.Info("Сервис возобновлен");
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+                Log.Error(ex);
             }
         }
     }
