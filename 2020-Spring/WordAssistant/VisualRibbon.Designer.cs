@@ -38,6 +38,7 @@
             this.tabCROC = this.Factory.CreateRibbonTab();
             this.groupAssistant = this.Factory.CreateRibbonGroup();
             this.buttonFields = this.Factory.CreateRibbonButton();
+            this.buttonTables = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.tabCROC.SuspendLayout();
             this.groupAssistant.SuspendLayout();
@@ -58,6 +59,7 @@
             // groupAssistant
             // 
             this.groupAssistant.Items.Add(this.buttonFields);
+            this.groupAssistant.Items.Add(this.buttonTables);
             this.groupAssistant.Label = "Помощник";
             this.groupAssistant.Name = "groupAssistant";
             // 
@@ -67,6 +69,13 @@
             this.buttonFields.Name = "buttonFields";
             this.buttonFields.ScreenTip = "Управление свойствами документов";
             this.buttonFields.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonFields_Click);
+            // 
+            // buttonTables
+            // 
+            this.buttonTables.Label = "Таблицы";
+            this.buttonTables.Name = "buttonTables";
+            this.buttonTables.ScreenTip = "Выравнивание всех таблиц по размеру окна";
+            this.buttonTables.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonTables_Click);
             // 
             // VisualRibbon
             // 
@@ -91,6 +100,7 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonTab tabCROC;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup groupAssistant;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonFields;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonTables;
     }
 
     partial class ThisRibbonCollection

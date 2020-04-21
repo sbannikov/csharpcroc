@@ -7,7 +7,7 @@ using System.Security;
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // общие сведения об этой сборке.
 [assembly: AssemblyTitle("WordAssistant")]
-[assembly: AssemblyDescription("Надстройка для Microsoft Word для переноса свойств документов между открытыми документами")]
+[assembly: AssemblyDescription("Надстройка для Microsoft Word - набор полезных вспомогательных функций")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("ЗАО КРОК инкорпорейтед")]
 [assembly: AssemblyProduct("Учебный курс 'Разработка приложений на языке С#'")]
@@ -34,5 +34,5 @@ using System.Security;
 // используя "*", как показано ниже:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.1")]
 

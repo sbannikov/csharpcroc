@@ -208,6 +208,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="VisualRibbon.resx">
       <DependentUpon>VisualRibbon.cs</DependentUpon>
@@ -232,6 +233,11 @@
     <AppDesigner Include="Properties\" />
     <None Include="WordAssistant_TemporaryKey.pfx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="126569-32-l.png" />
+    <Content Include="126569-32-r.png" />
+    <Content Include="Croc.ico" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -245,6 +251,9 @@
   <PropertyGroup>
     <ManifestCertificateThumbprint>D32A334CCF3D6B2E531E0D4259C053B2723F0DC5</ManifestCertificateThumbprint>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Croc.ico</ApplicationIcon>
+  </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- Include additional build rules for an Office application add-in. -->
@@ -255,7 +264,7 @@
       <FlavorProperties GUID="{BAA0C2D2-18E2-41B9-852F-F413020CAA33}">
         <ProjectProperties HostName="Word" HostPackage="{29A7B9D7-A7F1-4328-8EF0-6B2D1A56B2C1}" OfficeVersion="15.0" VstxVersion="4.0" ApplicationType="Word" Language="cs" TemplatesPath="" DebugInfoExeName="#Software\Microsoft\Office\16.0\Word\InstallRoot\Path#WINWORD.EXE" DebugInfoCommandLine="/x" AddItemTemplatesGuid="{51063C3A-E220-4D12-8922-BDA915ACD783}" />
         <Host Name="Word" GeneratedCodeNamespace="WordAssistant" PublishedHash="69C324AB27932AA2FBF2B7EA72250886FF164DE6" IconIndex="0">
-          <HostItem Name="ThisAddIn" Code="ThisAddIn.cs" CanonicalName="AddIn" CanActivate="false" IconIndex="1" Blueprint="ThisAddIn.Designer.xml" GeneratedCode="ThisAddIn.Designer.cs" PublishedHash="0111C59A4D2B7CCC6F0F75DAF222B1B38E9A9122" />
+          <HostItem Name="ThisAddIn" Code="ThisAddIn.cs" CanonicalName="AddIn" PublishedHash="0111C59A4D2B7CCC6F0F75DAF222B1B38E9A9122" CanActivate="false" IconIndex="1" Blueprint="ThisAddIn.Designer.xml" GeneratedCode="ThisAddIn.Designer.cs" />
         </Host>
       </FlavorProperties>
     </VisualStudio>

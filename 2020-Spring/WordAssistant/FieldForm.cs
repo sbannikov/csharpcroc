@@ -66,7 +66,7 @@ namespace WordAssistant
         }
 
         /// <summary>
-        /// Копирование свойств из документа в документ
+        /// Копирование свойств из документа в документ направо
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -117,6 +117,16 @@ namespace WordAssistant
 
             // Обновление списка
             comboDoc_SelectedIndexChanged(comboDoc2, null);
+        }
+
+        /// <summary>
+        ///  Копирование свойств из документа в документ налево
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonLeft_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
