@@ -20,9 +20,9 @@ namespace BGworker
         private Color back;
 
         /// <summary>
-        /// Список потоков
+        /// Словарь потоков
         /// </summary>
-        private List<BackgroundWorker> workers = new List<BackgroundWorker>();
+        private Dictionary<BackgroundWorker, int> workers = new Dictionary<BackgroundWorker, int>();
 
         /// <summary>
         /// Конструктор формы
@@ -37,13 +37,19 @@ namespace BGworker
             {
                 var bg = new BackgroundWorker()
                 {
+                    // Можно сообщать о ходе выполнения процесса
                     WorkerReportsProgress = true,
+                    // Можно прервать выполнение досрочно
                     WorkerSupportsCancellation = true
                 };
+                // Выполение кода в отдельном потоке
                 bg.DoWork += worker_DoWork;
+                // Сообщение о ходе выполнения
                 bg.ProgressChanged += worker_ProgressChanged;
+                // Вычисление завершено
                 bg.RunWorkerCompleted += worker_RunWorkerCompleted;
-                workers.Add(bg);
+                // Нумеруем потоки с 1
+                workers.Add(bg, i + 1);
             }
         }
 
@@ -68,7 +74,6 @@ namespace BGworker
         {
             double R = 0; // результат
             double delta = (b - a) / N;
-            long n = N / 100; // Количество итераций на 1%          
             int percent = 0;
 
             // Цикл интегрирования
@@ -87,7 +92,7 @@ namespace BGworker
                     }
                     else
                     {
-                        progress.Value = currentPercent;
+                        progress3.Value = currentPercent;
                     }
                     // Сбросить счетчик
                     percent = currentPercent;
@@ -110,15 +115,16 @@ namespace BGworker
         {
             try
             {
+                // немного дизайна
+                buttonGo.BackColor = Color.LightCoral;
 
                 // Запуск фоновых потоков
                 foreach (var bg in workers)
                 {
-                    bg.RunWorkerAsync(textN.Text);
+                    bg.Key.RunWorkerAsync(textN.Text);
                 }
+                // Однопоточный запуск
                 // Integrator(0, Math.PI / 2, long.Parse(textN.Text), null);
-                // немного дизайна
-                buttonGo.BackColor = Color.LightCoral;
             }
             catch (Exception ex)
             {
@@ -138,6 +144,19 @@ namespace BGworker
         }
 
         /// <summary>
+        /// Получение индикатора по обработчку потока
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <returns></returns>
+        private ProgressBar GetProgress(object sender)
+        {
+            // Получение номера обработчика потоков
+            int n = workers[(BackgroundWorker)sender];
+            // Получение индикатора по номеру 
+            return (ProgressBar)Controls[$"progress{n}"];
+        }
+
+        /// <summary>
         /// Завершение выполнения асинхронной операции
         /// </summary>
         /// <param name="sender"></param>
@@ -147,7 +166,7 @@ namespace BGworker
             list.Items.Add((string)e.Result);
             // отметить завершение в интерфейсе
             buttonGo.BackColor = back;
-            progress.Value = 0;
+            GetProgress(sender).Value = 0;
         }
 
         /// <summary>
@@ -157,7 +176,8 @@ namespace BGworker
         /// <param name="e"></param>
         private void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            progress.Value = e.ProgressPercentage;
+            // Изменение значения
+            GetProgress(sender).Value = e.ProgressPercentage;
         }
 
         /// <summary>
@@ -170,7 +190,7 @@ namespace BGworker
             // Останов
             foreach (var bg in workers)
             {
-                bg.CancelAsync();
+                bg.Key.CancelAsync();
             }
         }
     }

@@ -56,7 +56,7 @@ namespace SeaBattle
                 for (int y = 0; y < 10; y++)
                 {
                     // Создание кнопки моего поля
-                    var b1 = new CellButton(x, y, true )
+                    var b1 = new CellButton(x, y, true)
                     {
                         Size = new Size(32, 32),
                         // Учет высоты меню и высоты панели инструментов при добавлении кнопки
@@ -72,7 +72,7 @@ namespace SeaBattle
                     {
                         Size = new Size(32, 32),
                         // Учет высоты меню и высоты панели инструментов при добавлении кнопки
-                        Location = new Point(40 * (x+11), 40 * y + menu.Height + tool.Height)
+                        Location = new Point(40 * (x + 11), 40 * y + menu.Height + tool.Height)
                     };
                     // Обработчик события
                     b2.Click += enemyButtonClick;
@@ -286,7 +286,7 @@ namespace SeaBattle
                     // Поиск кнопки по координатам
                     CellButton b = getButton(cell.X, cell.Y, false);
                     // Перекрасить кнопку
-                    b.BackColor = (cell.CellState == Data.State.Alive) ? Color.Red:  Color.Blue;
+                    b.BackColor = (cell.CellState == Data.State.Alive) ? Color.Red : Color.Blue;
                 }
             }
             finally

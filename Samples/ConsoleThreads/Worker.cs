@@ -123,11 +123,11 @@ namespace ConsoleThreads
                     // Определение хода выполнения
                     if (currentPercent != percent)
                     {
-                        // Примечание
-                        // Если удалить следующую строку, то правильность вывода информации на экран нарушится
-                        lock (locker)
+                        if (Console.WindowWidth > myNumber * 8)
                         {
-                            if (Console.WindowWidth > myNumber * 8)
+                            // Примечание
+                            // Если удалить следующую строку, то правильность вывода информации на экран нарушится
+                            lock (locker)
                             {
                                 Console.SetCursorPosition(myNumber * 8, 0);
                                 Console.Write(currentPercent + "%");

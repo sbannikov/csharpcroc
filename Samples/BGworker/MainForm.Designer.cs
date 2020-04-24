@@ -33,9 +33,11 @@
             this.textN = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.buttonGo = new System.Windows.Forms.Button();
-            this.progress = new System.Windows.Forms.ProgressBar();
+            this.progress3 = new System.Windows.Forms.ProgressBar();
             this.buttonStop = new System.Windows.Forms.Button();
             this.list = new System.Windows.Forms.ListBox();
+            this.progress2 = new System.Windows.Forms.ProgressBar();
+            this.progress1 = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // label1
@@ -69,8 +71,7 @@
             // 
             // buttonGo
             // 
-            this.buttonGo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonGo.Location = new System.Drawing.Point(16, 211);
+            this.buttonGo.Location = new System.Drawing.Point(19, 211);
             this.buttonGo.Margin = new System.Windows.Forms.Padding(4);
             this.buttonGo.Name = "buttonGo";
             this.buttonGo.Size = new System.Drawing.Size(308, 28);
@@ -79,20 +80,20 @@
             this.buttonGo.UseVisualStyleBackColor = true;
             this.buttonGo.Click += new System.EventHandler(this.buttonGo_Click);
             // 
-            // progress
+            // progress3
             // 
-            this.progress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.progress3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.progress.Location = new System.Drawing.Point(16, 246);
-            this.progress.Margin = new System.Windows.Forms.Padding(4);
-            this.progress.Name = "progress";
-            this.progress.Size = new System.Drawing.Size(597, 41);
-            this.progress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progress.TabIndex = 3;
+            this.progress3.Location = new System.Drawing.Point(19, 354);
+            this.progress3.Margin = new System.Windows.Forms.Padding(4);
+            this.progress3.Name = "progress3";
+            this.progress3.Size = new System.Drawing.Size(593, 41);
+            this.progress3.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progress3.TabIndex = 3;
             // 
             // buttonStop
             // 
-            this.buttonStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonStop.Location = new System.Drawing.Point(332, 211);
             this.buttonStop.Margin = new System.Windows.Forms.Padding(4);
             this.buttonStop.Name = "buttonStop";
@@ -111,14 +112,38 @@
             this.list.Size = new System.Drawing.Size(593, 116);
             this.list.TabIndex = 5;
             // 
+            // progress2
+            // 
+            this.progress2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.progress2.Location = new System.Drawing.Point(19, 305);
+            this.progress2.Margin = new System.Windows.Forms.Padding(4);
+            this.progress2.Name = "progress2";
+            this.progress2.Size = new System.Drawing.Size(593, 41);
+            this.progress2.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progress2.TabIndex = 3;
+            // 
+            // progress1
+            // 
+            this.progress1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.progress1.Location = new System.Drawing.Point(19, 256);
+            this.progress1.Margin = new System.Windows.Forms.Padding(4);
+            this.progress1.Name = "progress1";
+            this.progress1.Size = new System.Drawing.Size(593, 41);
+            this.progress1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progress1.TabIndex = 3;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(629, 302);
+            this.ClientSize = new System.Drawing.Size(629, 410);
             this.Controls.Add(this.list);
             this.Controls.Add(this.buttonStop);
-            this.Controls.Add(this.progress);
+            this.Controls.Add(this.progress1);
+            this.Controls.Add(this.progress2);
+            this.Controls.Add(this.progress3);
             this.Controls.Add(this.buttonGo);
             this.Controls.Add(this.textN);
             this.Controls.Add(this.label2);
@@ -139,9 +164,11 @@
         private System.Windows.Forms.TextBox textN;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button buttonGo;
-        private System.Windows.Forms.ProgressBar progress;
+        private System.Windows.Forms.ProgressBar progress3;
         private System.Windows.Forms.Button buttonStop;
         private System.Windows.Forms.ListBox list;
+        private System.Windows.Forms.ProgressBar progress2;
+        private System.Windows.Forms.ProgressBar progress1;
     }
 }
 
