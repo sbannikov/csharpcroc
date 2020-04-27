@@ -35,14 +35,31 @@ namespace WordAssistant
         /// <param name="e"></param>
         private void buttonTables_Click(object sender, RibbonControlEventArgs e)
         {
-            // Текущее выделение
-            Selection s = ThisAddIn.App.Selection;
-            // Список таблиц
-            Tables tables = (s.Start == s.End) ? ThisAddIn.App.ActiveDocument.Tables : s.Tables;
-            // Обработка таблиц
-            foreach (Table t in tables)
+            try
             {
-                t.AutoFitBehavior(WdAutoFitBehavior.wdAutoFitWindow);
+                // Текущее выделение
+                Selection s = ThisAddIn.App.Selection;
+
+                // Список таблиц
+                Tables tables = (s.Start == s.End) ? ThisAddIn.App.ActiveDocument.Tables : s.Tables;
+
+                // Обработка таблиц
+                foreach (Table t in tables)
+                {
+                    // Таблица по ширине окна
+                    t.AutoFitBehavior(WdAutoFitBehavior.wdAutoFitWindow);
+                    // запрет на разрыв ячейки
+                    t.Rows.AllowBreakAcrossPages = 0;             
+                    // Сброс заголовка для всей таблицы
+                    t.Rows.HeadingFormat = 0;
+                    // Первая строка - заголовок
+                    t.Rows[1].HeadingFormat = -1;
+                }
+                System.Windows.Forms.MessageBox.Show("Обработка закончена");
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
             }
         }
     }
