@@ -103,7 +103,6 @@ namespace BlogDownload
             return s.Replace("&quot;", @"""");
         }
 
-
         /// <summary>
         /// Загрузить статью из интернета
         /// </summary>
@@ -161,11 +160,13 @@ namespace BlogDownload
             }
 
             // Поиск текста сообщения регулярным выражением
-            var message = Regex.Match(s, @"<article class=""blog-post-page-font"">(.+?)</article>");
+            var message = Regex.Match(s, @"<article class=""blog-post-page-font"">(.+?)</article>", RegexOptions.Singleline);
             if (message.Success)
             {
                 // Строка с тегами
                 string m = message.Groups[1].Value;
+                // Очистка от стилевых таблиц
+                m = Regex.Replace(m, @"<style type=""text/css"">(.+?)</style>", string.Empty, RegexOptions.Singleline);
                 // Очистка от тегов и спецсимволов
                 Body = Clean(Regex.Replace(m, "<.*?>", string.Empty));               
             }
