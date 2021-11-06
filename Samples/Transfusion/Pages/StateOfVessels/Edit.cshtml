@@ -14,6 +14,15 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <label asp-for="StateOfVessel.State.SType" class="control-label"></label>
+                <input asp-for="StateOfVessel.State.SType" class="form-control" disabled />
+
+                <label asp-for="StateOfVessel.Vessel.Number" class="control-label"></label>
+                <input asp-for="StateOfVessel.Vessel.Number" class="form-control" disabled />
+
+                <label asp-for="StateOfVessel.Vessel.Volume" class="control-label"></label>
+                <input asp-for="StateOfVessel.Vessel.Volume" class="form-control" disabled />
+
                 <label asp-for="StateOfVessel.Value" class="control-label"></label>
                 <input asp-for="StateOfVessel.Value" class="form-control" />
                 <span asp-validation-for="StateOfVessel.Value" class="text-danger"></span>
@@ -23,7 +32,7 @@
             <input type="hidden" asp-for="StateOfVessel.VesselID" />
 
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
             </div>
         </form>
     </div>

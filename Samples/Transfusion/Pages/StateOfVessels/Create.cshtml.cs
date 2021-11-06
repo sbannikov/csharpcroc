@@ -34,7 +34,9 @@ namespace Transfusion.StateOfVessels
             // Создать сосуд и сохранить в нем идентификатор головоломки
             StateOfVessel = new StateOfVessel()
             {
+                State = state,
                 StateID = state.ID,
+                Vessel = vessel,
                 VesselID = vesselid.Value
             };
             return Page();
@@ -53,9 +55,11 @@ namespace Transfusion.StateOfVessels
             }
 
             _context.StatesOfVessels.Add(StateOfVessel);
+            Vessel vessel = _context.Vessels.Find(StateOfVessel.VesselID);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            // Возврат к просмотру головоломки
+            return RedirectToPage("/Puzzles/Details", new { id = vessel.PuzzleID });
         }
     }
 }

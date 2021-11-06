@@ -45,7 +45,7 @@ namespace Transfusion.Storage
         {
             get
             {
-                return Vessel.Volume - Value.Value;
+                return (Vessel == null) ? 0 : (Vessel.Volume - Value.Value);
             }
         }
 

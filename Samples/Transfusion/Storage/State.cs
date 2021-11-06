@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace Transfusion.Storage
         /// <summary>
         /// Тип состояния
         /// </summary>
+        [Display(Name = "Тип состояния")]
         public virtual StateType SType { get; set; }
         /// <summary>
         /// Идентификатор головоломки

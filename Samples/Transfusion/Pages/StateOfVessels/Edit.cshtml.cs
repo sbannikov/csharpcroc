@@ -22,14 +22,9 @@ namespace Transfusion.StateOfVessels
         [BindProperty]
         public StateOfVessel StateOfVessel { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        public IActionResult OnGetAsync(Guid id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            StateOfVessel = await _context.StatesOfVessels.FirstOrDefaultAsync(m => m.ID == id);
+            StateOfVessel = _context.StatesOfVessels.Find(id);
 
             if (StateOfVessel == null)
             {
@@ -65,7 +60,9 @@ namespace Transfusion.StateOfVessels
                 }
             }
 
-            return RedirectToPage("./Index");
+            // Возврат к просмотру головоломки
+            Vessel vessel = _context.Vessels.Find(StateOfVessel.VesselID);
+            return RedirectToPage("/Puzzles/Details", new { id = vessel.PuzzleID });
         }
 
         private bool StateOfVesselExists(Guid id)
