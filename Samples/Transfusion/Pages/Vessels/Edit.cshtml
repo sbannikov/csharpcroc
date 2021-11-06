@@ -1,0 +1,39 @@
+﻿@page
+@model Transfusion.Vessels.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Редактирование сосуда</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Vessel.Number" class="control-label"></label>
+                <input asp-for="Vessel.Number" class="form-control" />
+                <span asp-validation-for="Vessel.Number" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Vessel.Volume" class="control-label"></label>
+                <input asp-for="Vessel.Volume" class="form-control" />
+                <span asp-validation-for="Vessel.Volume" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Vessel.ID" />
+            <input type="hidden" asp-for="Vessel.PuzzleID" />
+            <div class="form-group">
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

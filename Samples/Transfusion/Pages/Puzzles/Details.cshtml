@@ -1,0 +1,130 @@
+﻿@page
+@model Transfusion.Puzzles.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Просмотр головоломки</h1>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Puzzle.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Puzzle.Name)
+        </dd>
+    </dl>
+</div>
+
+<a asp-page="./Edit" asp-route-id="@Model.Puzzle.ID" class="btn btn-info">Редактировать</a>
+<a asp-page="./Index" class="btn btn-info">Возврат в список</a>
+<a href="/Vessels/Create?puzzleid=@Model.Puzzle.ID" class="btn btn-info">Добавить сосуд</a>
+<a asp-page="./Solution" asp-route-id="@Model.Puzzle.ID" class="btn btn-info">Решить голововоломку</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Puzzle.Vessels.First().Number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Puzzle.Vessels.First().Volume)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Puzzle.Vessels != null)
+        {
+            foreach (var item in Model.Puzzle.Vessels.OrderBy(a => a.Number))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Number)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Volume)
+                    </td>
+                    <td>
+                        <a asp-page="/Vessels/Edit" asp-route-id="@item.ID" class="btn btn-info">Редактировать</a>
+                        <a asp-page="/Vessels/Delete" asp-route-id="@item.ID" class="btn btn-danger">Удалить</a>
+                        <a href="/StateOfVessels/Create?vesselid=@item.ID&type=Start" class="btn btn-info">Начальное состояние</a>
+                        <a href="/StateOfVessels/Create?vesselid=@item.ID&type=Final" class="btn btn-info">Финальное состояние</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<h2>Начальное состояние</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StartState.First().Vessel.Number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartState.First().Value)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Puzzle.Vessels != null)
+        {
+            foreach (var item in Model.StartState.OrderBy(a => a.Vessel.Number))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Vessel.Number)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Value)
+                    </td>
+                    <td>
+                        <a asp-page="/StateOfVessels/Edit" asp-route-id="@item.ID" class="btn btn-info">Редактировать</a> |
+                        <a asp-page="/StateOfVessels/Delete" asp-route-id="@item.ID" class="btn btn-danger">Удалить</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<h2>Финальное состояние</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FinalState.First().Vessel.Number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FinalState.First().Value)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Puzzle.Vessels != null)
+        {
+            foreach (var item in Model.FinalState.OrderBy(a => a.Vessel.Number))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Vessel.Number)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Value)
+                    </td>
+                    <td>
+                        <a asp-page="/StateOfVessels/Edit" asp-route-id="@item.ID" class="btn btn-info">Редактировать</a> |
+                        <a asp-page="/StateOfVessels/Delete" asp-route-id="@item.ID" class="btn btn-danger">Удалить</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

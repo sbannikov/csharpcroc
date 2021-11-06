@@ -1,0 +1,36 @@
+﻿@page
+@model Transfusion.Puzzles.IndexModel
+
+@{
+    ViewData["Title"] = "Список";
+}
+
+<h1>Список</h1>
+
+<p>
+    <a asp-page="Create">Создать</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Puzzle[0].Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Puzzle) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Правка</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Сведения</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Удаление</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
