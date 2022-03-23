@@ -99,32 +99,32 @@ namespace Transfusion
             // Построение матрицы для визуализации
             Matrix = new List<List<int>>();
 
-
+            /*
             foreach (var s in _context.States.Where(a => a.PuzzleID == id).OrderBy(a => a.SType).ToList())
             {
                 // Строка состояния для визуализации
                 var list = s.StateOfVessels.OrderBy(a => a.Vessel.Number).Select(a => a.Value.HasValue ? a.Value.Value : -1).ToList();
                 Matrix.Add(list);
             }
-
-            /*
-              State state = _context.GetState(id.Value, StateType.Solution);
-              // Строка состояния для визуализации
-              var list = state.StateOfVessels.Select(a => a.Value.Value).ToList();
-              Matrix.Add(list);
-
-              List<Guid> moves = new List<Guid>();
-              while (state.SType != StateType.Start)
-              {
-                  // Переход к предыдущему состоянию
-                  move = _context.Moves.First(a => a.ToState.ID == state.ID && !moves.Contains(a.ID));
-                  moves.Add(move.ID);
-                  state = move.FromState;
-                  // Строка состояния для визуализации
-                  list = state.StateOfVessels.Select(a => a.Value.Value).ToList();
-                  Matrix.Add(list);
-              }
             */
+
+            State state = _context.GetState(id.Value, StateType.Solution);
+            // Строка состояния для визуализации
+            var list = state.StateOfVessels.Select(a => a.Value.Value).ToList();
+            Matrix.Add(list);
+
+            List<Guid> states = new List<Guid>() { state.ID };
+            while (state.SType != StateType.Start)
+            {
+                // Переход к предыдущему состоянию
+                move = _context.Moves.First(a => a.ToState.ID == state.ID && !states.Contains(a.FromState.ID));
+                state = move.FromState;
+                states.Add(state.ID);
+                // Строка состояния для визуализации
+                list = state.StateOfVessels.Select(a => a.Value.Value).ToList();
+                Matrix.Add(list);
+            }
+
 
             return Page();
         }
