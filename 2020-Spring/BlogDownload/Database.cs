@@ -34,8 +34,8 @@ namespace BlogDownload
         /// </summary>
         /// <returns></returns>
         public SqlCommand GetCommand()
-        { 
-            return conn.CreateCommand(); 
+        {
+            return conn.CreateCommand();
         }
 
         /// <summary>
@@ -45,12 +45,14 @@ namespace BlogDownload
         public int GetBlogCount()
         {
             // Формирование запроса к БД
-            SqlCommand cmd = GetCommand();
-            // Все записи
-            cmd.CommandText = "SELECT COUNT(*) FROM [Blog]";
-            // Скалярный запрос к БД
-            int count = (int)cmd.ExecuteScalar();
-            return count;
+            using (SqlCommand cmd = GetCommand())
+            {
+                // Все записи
+                cmd.CommandText = "SELECT COUNT(*) FROM [Blog]";
+                // Скалярный запрос к БД
+                int count = (int)cmd.ExecuteScalar();
+                return count;
+            }
         }
 
         /// <summary>
@@ -62,22 +64,24 @@ namespace BlogDownload
             var list = new List<BlogItem>();
 
             // Формирование запроса к БД
-            SqlCommand cmd = GetCommand();
-            // Только записи с заполненным полем URL
-            cmd.CommandText = "SELECT [ID], [Date], [Topic], [URL], ISNULL([Instagram], ''), [Image] FROM [Blog] WHERE NOT URL IS NULL AND Body IS NULL";
-
-            // Выполнение запроса на чтение таблицы
-            SqlDataReader rdr = cmd.ExecuteReader();
-
-            // Последовательная обработка всех строк набора данных
-            while (rdr.Read())
+            using (SqlCommand cmd = GetCommand())
             {
-                var item = new BlogItem(rdr);
-                list.Add(item);
+                // Только записи с заполненным полем URL
+                cmd.CommandText = "SELECT [ID], [Date], [Topic], [URL], ISNULL([Instagram], ''), [Image] FROM [Blog] WHERE NOT URL IS NULL AND Body IS NULL";
+
+                // Выполнение запроса на чтение таблицы
+                using (SqlDataReader rdr = cmd.ExecuteReader())
+                {
+                    // Последовательная обработка всех строк набора данных
+                    while (rdr.Read())
+                    {
+                        var item = new BlogItem(rdr);
+                        list.Add(item);
+                    }
+
+                    return list;
+                }
             }
-
-            return list;
         }
-
     }
 }

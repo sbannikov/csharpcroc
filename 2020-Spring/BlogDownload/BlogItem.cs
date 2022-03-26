@@ -114,6 +114,7 @@ namespace BlogDownload
             // Загрузка веб-страницы в виде массива байт
             WebClient client = new WebClient();
             string url = Properties.Settings.Default.WebRoot + URL;
+            client.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.82 Safari/537.36");
             byte[] data = client.DownloadData(url);
             // Перекодировка в UTF-8
             string s = Encoding.UTF8.GetString(data);
@@ -183,19 +184,21 @@ namespace BlogDownload
         public void Save(Database db)
         {
             // Создание параметрического запроса
-            SqlCommand cmd = db.GetCommand();
-            cmd.CommandText = "UPDATE Blog SET Body = @body, Title=@title, Description=@descr WHERE ID = @id";
-            cmd.Parameters.AddWithValue("id", ID);
-            cmd.Parameters.AddWithValue("body", Body);
-            cmd.Parameters.AddWithValue("descr", Description);
-            cmd.Parameters.AddWithValue("title", Title);
-
-            // Обновление записи в БД
-            int result = cmd.ExecuteNonQuery();
-            // Несколько избыточный контроль корректности выполнения запроса
-            if (result != 1)
+            using (SqlCommand cmd = db.GetCommand())
             {
-                throw new ApplicationException("Ошибка при обновлении данных");
+                cmd.CommandText = "UPDATE Blog SET Body=@body, Title=@title, Description=@descr WHERE ID = @id";
+                cmd.Parameters.AddWithValue("id", ID);
+                cmd.Parameters.AddWithValue("body", Body);
+                cmd.Parameters.AddWithValue("descr", Description);
+                cmd.Parameters.AddWithValue("title", Title);
+
+                // Обновление записи в БД
+                int result = cmd.ExecuteNonQuery();
+                // Несколько избыточный контроль корректности выполнения запроса
+                if (result != 1)
+                {
+                    throw new ApplicationException("Ошибка при обновлении данных");
+                }
             }
         }
 
