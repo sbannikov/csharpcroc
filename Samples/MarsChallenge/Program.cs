@@ -40,8 +40,9 @@ namespace MarsChallenge
             Console.WriteLine("Шаг 0: {0} пар чисел", list.Count);
 
             // Шаг 1. Группируем по суммам
-            foreach (var group in list.GroupBy(a => a.Sum).ToList())
-            {
+            var g1 = list.GroupBy(a => a.Sum).ToList();
+            foreach (var group in g1)
+            {                
                 // Если сумма чисел является уникальной в последовательности,
                 // то Фридрих, который знает сумму, уже знал бы оба числа
                 // Но он не знает
@@ -55,7 +56,8 @@ namespace MarsChallenge
             Console.WriteLine("Шаг 1: {0} пар чисел", list.Count);
 
             // Шаг 2. Группируем по произведениям
-            foreach (var group in list.GroupBy(a => a.Mul).ToList())
+            var g2 = list.GroupBy(a => a.Mul).ToList();
+            foreach (var group in g2)
             {
                 // Если произведение чисел является уникальной в последовательности,
                 // то Милс, который знает произведение, уже знал бы оба числа
@@ -70,13 +72,14 @@ namespace MarsChallenge
             Console.WriteLine("Шаг 2: {0} пар чисел", list.Count);
 
             // Шаг 3. Снова группируем по суммам
-            foreach (var group in list.GroupBy(a => a.Sum).ToList())
+            var g3 = list.GroupBy(a => a.Sum).ToList();
+            foreach (var group in g3)
             {
                 // Сумма чисел является уникальной в последовательности,
                 // так как Фридрих, который знает сумму, уже знает решение
                 // Удаляем все остальные комбинации
                 if (group.Count() > 1)
-                {
+                {                    
                     foreach (var item in group)
                     {
                         list.Remove(item);
@@ -86,8 +89,9 @@ namespace MarsChallenge
             Console.WriteLine("Шаг 3: {0} пар чисел", list.Count);
 
             // Шаг 4. Группируем по произведениям
+            var g4 = list.GroupBy(a => a.Mul).ToList();
             Console.WriteLine("Ответ:");
-            foreach (var group in list.GroupBy(a => a.Mul).ToList())
+            foreach (var group in g4)
             {
                 // Фридрих уже нашел решение, 
                 // поэтому Милс, который знает только произведение,

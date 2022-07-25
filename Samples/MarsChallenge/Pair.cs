@@ -38,5 +38,7 @@ namespace MarsChallenge
             Sum = a + b;
             Mul = a * b;
         }
+
+        public override string ToString() => $"{A} -- {B}";        
     }
 }
