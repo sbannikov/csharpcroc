@@ -16,7 +16,7 @@ namespace BlogDownload
                 Console.WriteLine("Соединение установлено");
                 Console.WriteLine($"В базе данных {db.GetBlogCount()} публикаций");
                 var list = db.GetBlogItems();
-                Console.WriteLine("Список загружен");
+                Console.WriteLine($"К загрузке {list.Count()} публикаций");
                 foreach (var item in list)
                 {
                     item.Download();

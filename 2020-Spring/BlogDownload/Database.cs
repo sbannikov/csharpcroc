@@ -66,8 +66,8 @@ namespace BlogDownload
             // Формирование запроса к БД
             using (SqlCommand cmd = GetCommand())
             {
-                // Только записи с заполненным полем URL
-                cmd.CommandText = "SELECT [ID], [Date], [Topic], [URL], ISNULL([Instagram], ''), [Image] FROM [Blog] WHERE NOT URL IS NULL AND Body IS NULL";
+                // Только не загруженные ранее записи с заполненным полем URL по возрастанию дат
+                cmd.CommandText = "SELECT [ID], [Date], [Topic], [URL], ISNULL([Instagram], ''), [Image] FROM [Blog] WHERE NOT URL IS NULL AND Body IS NULL ORDER BY [Date]";
 
                 // Выполнение запроса на чтение таблицы
                 using (SqlDataReader rdr = cmd.ExecuteReader())

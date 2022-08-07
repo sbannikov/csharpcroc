@@ -52,6 +52,11 @@ namespace BlogDownload
         public string Body;
 
         /// <summary>
+        /// Имя файла для сохранения загруженного текста и картинок
+        /// </summary>
+        private string Name => $"{Date:yyyy-MM-dd} {URL}";
+
+        /// <summary>
         /// Конструктор из базы данных
         /// Порядок столбцов: [ID], [Date], [Topic], [URL], [Instagram], [Image]
         /// </summary>
@@ -120,7 +125,7 @@ namespace BlogDownload
             string s = Encoding.UTF8.GetString(data);
 
             // Сохранение загруженной веб-страницы в файл
-            System.IO.File.WriteAllText(CheckFile($@"{root}txt\{URL}.html"), s);
+            System.IO.File.WriteAllText(CheckFile($@"{root}txt\{Name}.html"), s);
 
             // Поиск заголовока регулярным выражением
             var title = Regex.Match(s, @"<meta property=""og:title"" content=""([^""]+)""/>");
@@ -153,7 +158,7 @@ namespace BlogDownload
                 // Адрес картинки на сайте Wix
                 string urli = picture.Groups[1].Value;
                 // Загрузка картинки в файл
-                client.DownloadFile(urli, CheckFile($@"{root}img\{URL}.png"));
+                client.DownloadFile(urli, CheckFile($@"{root}img\{Name}.png"));
             }
             else
             {
